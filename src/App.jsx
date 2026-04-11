@@ -13,6 +13,7 @@ import WorkPage from './pages/WorkPage';
 import ExpertisePage from './pages/ExpertisePage';
 import StudioPage from './pages/StudioPage';
 import ContactPage from './pages/ContactPage';
+import CaseStudyPage from './pages/CaseStudyPage';
 
 // Import consolidated section styles
 import './components/StackedCards.css';
@@ -25,16 +26,16 @@ function App() {
     // Only init Lenis after loading is done to prevent pre-scroll glitches
     if (!loading) {
       const lenis = new Lenis({ lerp: 0.10, smoothTouch: false });
+      window.lenis = lenis; // Expose strictly for router reset calls
       function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
       const id = requestAnimationFrame(raf);
-      return () => { lenis.destroy(); cancelAnimationFrame(id); };
+      return () => { 
+        lenis.destroy(); 
+        window.lenis = null;
+        cancelAnimationFrame(id); 
+      };
     }
   }, [loading]);
-
-  // Scroll to top on route change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
 
   return (
     <>
@@ -50,10 +51,20 @@ function App() {
         >
           <Navbar />
           
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence 
+            mode="wait" 
+            initial={false}
+            onExitComplete={() => {
+              window.scrollTo(0, 0);
+              if (window.lenis) {
+                window.lenis.scrollTo(0, { immediate: true });
+              }
+            }}
+          >
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
               <Route path="/work" element={<WorkPage />} />
+              <Route path="/work/:slug" element={<CaseStudyPage />} />
               <Route path="/expertise" element={<ExpertisePage />} />
               <Route path="/studio" element={<StudioPage />} />
               <Route path="/contact" element={<ContactPage />} />

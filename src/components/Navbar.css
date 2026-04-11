@@ -146,6 +146,42 @@
   background: #e0e0e0;
 }
 
+/* ── LIGHT THEME (For Expertise/Studio) ── */
+.is-light-theme .navbar__logo {
+  filter: invert(1);
+}
+
+.is-light-theme .navbar__text {
+  color: #000;
+}
+
+.is-light-theme .navbar__link {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.is-light-theme .navbar__link:hover,
+.is-light-theme .navbar__link.is-active {
+  color: #000;
+}
+
+.is-light-theme .navbar__link::after {
+  background: #000;
+}
+
+.is-light-theme .navbar__cta {
+  background: #000;
+  color: #fff;
+}
+
+.is-light-theme .navbar__cta:hover {
+  background: #222;
+}
+
+.is-light-theme .hamburger__line {
+  background: #000;
+}
+
+
 /* ── MOBILE ADJUSTMENTS ── */
 @media (max-width: 900px) {
   .navbar-pill.is-scrolled {

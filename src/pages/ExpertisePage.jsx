@@ -138,19 +138,23 @@ const ExpertisePage = () => {
             <h2 className="h-xl">How we <i>execute</i></h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
+          <div className="proc-grid">
             {PROCESS_STEPS.map((step, i) => (
               <motion.div 
                 key={step.num}
+                className="proc-card"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                style={{ padding: '32px', background: 'var(--bg)', borderRadius: 'var(--r-md)', border: '1px solid var(--border)' }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span style={{ fontSize: '2rem', fontFamily: 'var(--font-serif)', color: 'var(--text-3)', display: 'block', marginBottom: '16px' }}>{step.num}</span>
-                <h4 style={{ fontSize: '1.2rem', marginBottom: '12px' }}>{step.title}</h4>
-                <p style={{ color: 'var(--text-2)', lineHeight: '1.6' }}>{step.desc}</p>
+                <div className="proc-num-bg">{step.num}</div>
+                <div className="proc-content">
+                  <span className="proc-index">{step.num}</span>
+                  <h4 className="proc-title">{step.title}</h4>
+                  <p className="proc-desc">{step.desc}</p>
+                </div>
+                <div className="proc-glow" />
               </motion.div>
             ))}
           </div>

@@ -1,19 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import CTASection from '../components/CTASection';
+import { PROJECTS_DATA } from '../data/projects';
 import './Pages.css';
-
-const PROJECTS = [
-  { id: 1, title: 'WorldQuant Foundry', category: 'Platform Engineering', year: '2025', color: '#1a1a2a' },
-  { id: 2, title: 'SOHub', category: 'Immersive Digital Experience', year: '2024', color: '#2a1a1a' },
-  { id: 3, title: 'Aura Protocol', category: 'Web3 & Financial Systems', year: '2024', color: '#1a2a1a' },
-  { id: 4, title: 'Vanguard OS', category: 'Enterprise SaaS Dashboard', year: '2023', color: '#252525' },
-  { id: 5, title: 'Lumina', category: 'Brand Identity & Strategy', year: '2023', color: '#101015' },
-  { id: 6, title: 'NextGen AI', category: 'Machine Learning Infrastructure', year: '2023', color: '#181525' },
-  { id: 7, title: 'Oasis Wellness', category: 'E-Commerce & Retail', year: '2022', color: '#2a251a' },
-  { id: 8, title: 'Nexus Logistics', category: 'B2B Logistics Platform', year: '2022', color: '#152528' }
-];
 
 const WorkPage = () => {
   return (
@@ -70,7 +61,7 @@ const WorkPage = () => {
           </div>
 
           <div className="work-grid">
-            {PROJECTS.map((proj, i) => (
+            {PROJECTS_DATA.map((proj, i) => (
               <motion.div 
                 key={proj.id} 
                 className="work-card"
@@ -79,12 +70,9 @@ const WorkPage = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, delay: (i % 2) * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div 
-                  className="work-card-image"
-                  style={{ background: proj.color }}
-                >
+                <Link to={`/work/${proj.slug}`} className="work-card-image" style={{ background: proj.color }}>
                   <div className="work-hover-reveal">View Case Study</div>
-                </div>
+                </Link>
                 <div className="work-card-meta">
                   <div className="work-card-info">
                     <h3 className="work-card-title">{proj.title}</h3>

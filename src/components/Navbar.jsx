@@ -16,6 +16,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const isLightPage = ['/expertise', '/studio'].includes(location.pathname);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 50);
@@ -24,7 +25,7 @@ const Navbar = () => {
   return (
     <>
       <header className="navbar-wrapper">
-        <div className={`navbar-pill ${scrolled ? 'is-scrolled' : ''}`}>
+        <div className={`navbar-pill ${scrolled ? 'is-scrolled' : ''} ${isLightPage && !scrolled ? 'is-light-theme' : ''}`}>
 
           {/* BRAND */}
           <Link to="/" className="navbar__brand" onClick={() => setMobileOpen(false)}>

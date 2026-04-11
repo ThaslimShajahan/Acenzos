@@ -448,11 +448,19 @@
 .cta-section::before {
   content: '';
   position: absolute;
-  top: -150px;
+  top: -200px; /* Taller fade for smoother transition */
   left: 0;
   right: 0;
-  height: 150px;
-  background: linear-gradient(to bottom, transparent, var(--bg-dark-card));
+  height: 200px;
+  /* Multi-stop gradient prevents the "grey smudge" by keeping purity longer */
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(17, 17, 16, 0.05) 50%,
+    rgba(17, 17, 16, 0.2) 70%,
+    rgba(17, 17, 16, 0.6) 85%,
+    var(--bg-dark-card) 100%
+  );
   pointer-events: none;
   z-index: -1;
 }
