@@ -1,0 +1,260 @@
+/* ════════════════════════════════════════
+   NAVBAR — FLOATING PILL STYLE
+   ════════════════════════════════════════ */
+
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  pointer-events: none; /* Allows clicking the background where the wrapper covers */
+}
+
+/* Base Top State (Edge to Edge, Transparent) */
+.navbar-pill {
+  pointer-events: auto; /* Re-enable clicks */
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 32px var(--pad-x);
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid transparent;
+  border-radius: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  /* Extremely smooth CSS transitions for the pill morphing */
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center top;
+}
+
+/* Scrolled State (Floating Dynamic Island) */
+.navbar-pill.is-scrolled {
+  margin-top: 24px;
+  max-width: 700px;
+  background: rgba(15, 15, 15, 0.5); /* Deep dark glass */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px; /* Full pill shape */
+  padding: 10px 10px 10px 24px; /* Asymmetric padding: small on right for the button */
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ── BRAND ── */
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar__logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.navbar__brand:hover .navbar__logo {
+  transform: rotate(90deg) scale(0.9); /* A cool geometric spin on hover */
+}
+
+.navbar__text {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  letter-spacing: -0.01em;
+}
+
+/* ── LINKS & CTA ── */
+.navbar__group {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navbar__link {
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navbar__link:hover {
+  color: #fff;
+}
+
+/* Very subtle dot under active/hover link */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar__link:hover::after,
+.navbar__link.is-active::after {
+  transform: translateX(-50%) scale(1);
+}
+
+.navbar__link.is-active {
+  color: #fff;
+}
+
+.navbar__cta {
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #000;
+  background: #fff;
+  padding: 10px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.navbar__cta:hover {
+  transform: scale(0.95);
+  background: #e0e0e0;
+}
+
+/* ── MOBILE ADJUSTMENTS ── */
+@media (max-width: 900px) {
+  .navbar-pill.is-scrolled {
+    max-width: 90vw;
+    margin-top: 16px;
+    padding: 10px 14px 10px 20px;
+  }
+
+  /* Hide desktop nav on mobile */
+  .navbar__desktop-only {
+    display: none !important;
+  }
+
+  /* Show hamburger only on mobile */
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* ── HAMBURGER ── */
+/* Hidden on desktop by default */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1100;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.hamburger__line {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Morph into × when open */
+.hamburger.is-open .hamburger__line:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger.is-open .hamburger__line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.is-open .hamburger__line:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ── MOBILE FULL-SCREEN DRAWER ── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(8, 8, 8, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu__links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0 40px;
+}
+
+.mobile-menu__link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 10vw, 4.5rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: color 0.3s ease;
+}
+
+.mobile-menu__link:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu__link:hover {
+  color: #fff;
+}
+
+.mobile-menu__index {
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.08em;
+  width: 24px;
+  flex-shrink: 0;
+}
+

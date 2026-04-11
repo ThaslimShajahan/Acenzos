@@ -1,0 +1,56 @@
+/* ════════════════════════════════════════
+   PRELOADER CSS
+   ════════════════════════════════════════ */
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #070707; /* Deep architectural black */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.preloader__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  width: 100%;
+}
+
+.preloader__logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.preloader__counter {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  line-height: 1;
+  color: #fff;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.preloader__bar-container {
+  width: 220px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.preloader__bar {
+  height: 100%;
+  background: #fff;
+  width: 0%;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}

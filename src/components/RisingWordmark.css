@@ -1,0 +1,27 @@
+/* RisingWordmark — Sohub letter-rise clone */
+
+.rising-wordmark {
+  display: flex;
+  align-items: flex-end;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Each letter sits inside an overflow:hidden clip.
+   When the letter is at y:110% it is invisible BELOW the clip.
+   When at y:0% it is fully visible INSIDE the clip. */
+.rising-letter-clip {
+  display: inline-block;
+  overflow: hidden;
+  /* small bottom padding so descenders aren't chopped  */
+  padding-bottom: 0.04em;
+  line-height: 1.05;
+}
+
+.rising-letter {
+  display: inline-block;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  font-size: inherit;
+  will-change: transform, color;
+}

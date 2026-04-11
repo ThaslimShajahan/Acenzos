@@ -1,0 +1,18 @@
+/* ════════════════════════════════════════
+   TECH SWARM (3D Drone Canvas)
+   ════════════════════════════════════════ */
+
+.tech-swarm-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50; /* Sits above standard backgrounds, below interactive content layers */
+  pointer-events: none !important; /* Critical so users can still click the website underneath */
+  overflow: hidden;
+}
+
+.tech-swarm-canvas-container canvas {
+  pointer-events: none !important;
+}

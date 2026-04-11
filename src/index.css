@@ -1,0 +1,237 @@
+/* ==========================================
+   ACENZOS GLOBAL DESIGN SYSTEM — Premium Tech Edition
+   Inspired by High-End Modern Editorial Design
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* ── Tokens ── */
+:root {
+  /* Backgrounds: Warm, premium off-white base */
+  --bg:           #f7f7f4;   /* Very soft warm off-white */
+  --bg-white:     #ffffff;   /* Pure white for contrast layers */
+  --bg-card:      #ffffff;
+  --bg-muted:     #ebebe5;   /* Slightly darker for hover/secondary */
+  --bg-dark:      #111110;   /* Deep charcoal rather than pure black */
+  --bg-dark-card: #1a1a18;
+
+  /* Text */
+  --text:         #111110;
+  --text-2:       rgba(17,17,16,0.6);
+  --text-3:       rgba(17,17,16,0.3);
+  --text-dark:    #f7f7f4;
+  --text-dark-2:  rgba(247,247,244,0.6);
+  --text-dark-3:  rgba(247,247,244,0.3);
+
+  /* Accents */
+  --accent:       #f5f5f0; 
+  --accent-blue:  #3b6ae1;
+
+  /* Borders */
+  --border:       rgba(17,17,16,0.1);
+  --border-2:     rgba(17,17,16,0.15);
+  --border-dark:  rgba(247,247,244,0.1);
+  --border-dark-2:rgba(247,247,244,0.15);
+
+  /* Shadows for Cards */
+  --shadow-sm:    0 4px 20px -4px rgba(17,17,16,0.06);
+  --shadow-md:    0 12px 30px -8px rgba(17,17,16,0.1);
+  --shadow-lg:    0 24px 60px -12px rgba(17,17,16,0.12);
+
+  /* Spacing */
+  --pad-x: 6vw;
+  --pad-y: 120px;
+
+  /* Radius */
+  --r-xs:  6px;
+  --r-sm:  12px;
+  --r-md:  20px;
+  --r-lg:  32px;
+  --r-pill:9999px;
+
+  /* Typography */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-slow: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: unset !important; font-size: 16px; }
+body {
+  font-family:            var(--font-body);
+  background:             var(--bg);
+  color:                  var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:             hidden;
+  line-height:            1.6;
+}
+a    { color: inherit; text-decoration: none; }
+img  { display: block; max-width: 100%; }
+ul   { list-style: none; }
+button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+
+/* ── Layout container ── */
+.wrap {
+  width:     100%;
+  max-width: 1600px;
+  margin:    0 auto;
+  padding:   0 var(--pad-x);
+}
+@media (max-width:1100px) { :root { --pad-x: 40px; } }
+@media (max-width:768px)  { :root { --pad-x: 24px; --pad-y: 80px; } }
+@media (max-width:480px)  { :root { --pad-x: 16px; } }
+
+/* ── Section rhythm ── */
+.section { padding: var(--pad-y) 0; position: relative; }
+.section-dark { background: var(--bg-dark); color: var(--text-dark); }
+.section-white { background: var(--bg-white); }
+.section-card  { background: var(--bg-card); }
+
+/* ── Section label / eyebrow ── */
+.eyebrow {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            8px;
+  font-size:      0.75rem;
+  font-weight:    600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color:          var(--text-2);
+  margin-bottom:  24px;
+}
+.eyebrow::before {
+  content:   '';
+  display:   block;
+  width:     12px; height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink:0;
+  opacity: 0.8;
+}
+.eyebrow-dark { color: var(--text-dark-2); }
+
+/* ── Headings ── */
+.h-display {
+  font-family:    var(--font-serif);
+  font-size:      clamp(4rem, 9vw, 8rem);
+  font-weight:    400;
+  line-height:    0.95;
+  letter-spacing: -0.02em;
+  color:          var(--text);
+  margin-bottom:  24px;
+}
+.h-display i {
+  font-style: italic;
+  padding-right: 0.1em;
+}
+
+.h-xl {
+  font-family:    var(--font-serif);
+  font-size:      clamp(3rem, 6vw, 5.5rem);
+  font-weight:    400;
+  line-height:    1;
+  letter-spacing: -0.01em;
+  color:          var(--text);
+  margin-bottom:  20px;
+}
+.h-xl i { font-style: italic; padding-right: 0.1em; }
+
+.h-lg {
+  font-family:    var(--font-body);
+  font-size:      clamp(1.5rem, 3vw, 2.5rem);
+  font-weight:    500;
+  line-height:    1.2;
+  letter-spacing: -0.02em;
+  color:          var(--text);
+}
+
+.h-white     { color: var(--text-dark); }
+.text-muted  { color: var(--text-2); }
+.text-muted-dark { color: var(--text-dark-2); }
+
+/* ── Buttons ── */
+.btn {
+  display:        inline-flex;
+  align-items:    center;
+  justify-content: center;
+  gap:            10px;
+  padding:        14px 28px;
+  border-radius:  var(--r-pill);
+  font-size:      0.9rem;
+  font-weight:    500;
+  letter-spacing: 0em;
+  transition:     all 0.4s var(--ease);
+  white-space:    nowrap;
+  position:       relative;
+  overflow:       hidden;
+}
+
+.btn-dark { 
+  background: var(--text); 
+  color: var(--bg); 
+}
+.btn-dark:hover { 
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(17,17,16,0.4); 
+}
+
+.btn-light { 
+  background: transparent; 
+  color: var(--text); 
+  border: 1px solid var(--border-2); 
+}
+.btn-light:hover { 
+  background: rgba(17,17,16,0.05); 
+  border-color: var(--text);
+}
+
+.btn-ghost-dark {
+  background: rgba(255,255,255,0.05);
+  color:      var(--text-dark);
+  border:     1px solid var(--border-dark);
+}
+.btn-ghost-dark:hover { 
+  background: rgba(255,255,255,0.1); 
+  border-color: rgba(255,255,255,0.3);
+}
+
+.btn-white { 
+  background: #fff; 
+  color: var(--text); 
+}
+.btn-white:hover { 
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(17,17,16,0.2); 
+}
+
+/* ── Divider ── */
+.divider { width: 100%; height: 1px; background: var(--border); margin: 2rem 0; }
+.divider-dark { background: var(--border-dark); }
+
+/* ── Utilities ── */
+.text-serif { font-family: var(--font-serif); }
+
+/* ── Custom Premium Scrollbar ── */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 140, 140, 0.4);
+  border-radius: 100px;
+  /* border + background-clip creates an invisible margin around the thumb so it floats */
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(140, 140, 140, 0.8);
+}
