@@ -17,7 +17,7 @@ const Footer = () => {
                 stagger={0.06}
                 delay={0}
              />
-             <p className="ac-tagline">Shaping the future of digital experiences.</p>
+             <p className="ac-tagline">Shopify experts. Product builders. AI innovators.</p>
           </div>
           
           <div className="ac-footer-nav">

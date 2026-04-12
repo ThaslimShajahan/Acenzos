@@ -10,33 +10,33 @@ import img4 from '../assets/imgs/11194857.jpg';
 const services = [
   {
     id: 1, num: '01',
-    title: 'Brand Identity',
-    description: 'We craft distinctive visual identities that define how your brand feels, speaks and stands out in a crowded world with lasting impact.',
-    tags: ['Logo Design', 'Typography', 'Color System', 'Guidelines'],
-    bg: '#0e1221', accent: '#4f8eff', img: img2,
+    title: 'Shopify Development',
+    description: 'Custom Shopify themes, Liquid development, app integrations and headless storefronts — built to convert and optimised for speed.',
+    tags: ['Liquid', 'Shopify Plus', 'Hydrogen', 'CRO'],
+    bg: '#0e1221', accent: '#96bf48', img: img2,
     size: 'large',
   },
   {
     id: 2, num: '02',
     title: 'Web & App Development',
-    description: 'From pixel-perfect web apps to native mobile experiences — fast, scalable, and delivered with craft.',
-    tags: ['React', 'Next.js', 'iOS/Android', 'CMS'],
+    description: 'From internal dashboards to SaaS platforms — full-stack React and Node.js apps, delivered with precision and craft.',
+    tags: ['React', 'Next.js', 'Node.js', 'Mobile'],
     bg: '#120e1f', accent: '#9f6fff', img: img3,
     size: 'small',
   },
   {
     id: 3, num: '03',
-    title: 'Digital Marketing',
-    description: 'Data-led campaigns that connect with your audiences and convert at every stage of the funnel.',
-    tags: ['SEO', 'Social', 'Content', 'Email'],
+    title: 'AI & Automation',
+    description: 'Deploy Redber AI or build custom LLM integrations — automate customer support, lead capture, and business workflows.',
+    tags: ['Redber AI', 'OpenAI', 'Chatbots', 'Workflows'],
     bg: '#0e1a14', accent: '#1ed8a0', img: img4,
     size: 'small',
   },
   {
     id: 4, num: '04',
-    title: '3D & Immersive',
-    description: 'Immersive 3D renders and WebGL experiences that make your products irresistible before they even ship.',
-    tags: ['WebGL', 'Three.js', '3D Renders', 'Animation'],
+    title: 'Brand & UI/UX Design',
+    description: 'Identities that land, interfaces that convert. We design brands and digital products that feel premium at every touchpoint.',
+    tags: ['Brand Identity', 'UI Systems', 'Figma', 'Motion'],
     bg: '#1a0e0e', accent: '#ff6b52', img: img1,
     size: 'wide',
   },
@@ -45,7 +45,6 @@ const services = [
 const ServiceCard = ({ service, index }) => (
   <motion.div
     className={`svc-card svc-card--${service.size}`}
-    style={{ background: service.bg }}
     initial={{ opacity: 0, y: 48 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.08 }}
@@ -70,7 +69,7 @@ const ServiceCard = ({ service, index }) => (
       {/* Image */}
       <div className="svc-img-wrap">
         <img src={service.img} alt={service.title} className="svc-img" />
-        <div className="svc-img-overlay" style={{ background: `linear-gradient(135deg, ${service.bg}dd 0%, transparent 60%)` }} />
+        <div className="svc-img-overlay" style={{ background: `linear-gradient(135deg, ${service.bg}40 0%, transparent 60%)` }} />
       </div>
 
       {/* Bottom arrow */}
@@ -81,8 +80,10 @@ const ServiceCard = ({ service, index }) => (
 const StackedCards = () => {
 
   return (
-    <section className="svc-section" id="services">
-      <div className="wrap">
+    <div className="svc-layer-group">
+      <div className="svc-layer-bg" />
+      <section className="svc-section" id="services">
+        <div className="wrap">
 
         {/* Header */}
         <div className="svc-header">
@@ -103,8 +104,8 @@ const StackedCards = () => {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16,1,0.3,1] }}
             style={{ color: 'var(--text-dark)' }}
           >
-            We are an <span className="shimmer-grey">unusual</span> digital agency<br />
-            focusing on your vision.
+            We build <span className="shimmer-grey">products</span> that drive<br />
+            real business growth.
           </motion.h2>
         </div>
 
@@ -117,6 +118,7 @@ const StackedCards = () => {
 
       </div>
     </section>
+    </div>
   );
 };
 

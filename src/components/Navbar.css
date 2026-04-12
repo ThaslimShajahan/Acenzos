@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   z-index: 1000;
@@ -182,24 +182,7 @@
 }
 
 
-/* ── MOBILE ADJUSTMENTS ── */
-@media (max-width: 900px) {
-  .navbar-pill.is-scrolled {
-    max-width: 90vw;
-    margin-top: 16px;
-    padding: 10px 14px 10px 20px;
-  }
 
-  /* Hide desktop nav on mobile */
-  .navbar__desktop-only {
-    display: none !important;
-  }
-
-  /* Show hamburger only on mobile */
-  .hamburger {
-    display: flex;
-  }
-}
 
 /* ── HAMBURGER ── */
 /* Hidden on desktop by default */
@@ -241,56 +224,21 @@
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* ── MOBILE FULL-SCREEN DRAWER ── */
-.mobile-menu {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background: rgba(8, 8, 8, 0.97);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* ── MOBILE ADJUSTMENTS ── */
+@media (max-width: 900px) {
+  .navbar-pill.is-scrolled {
+    max-width: 90vw;
+    margin-top: 16px;
+    padding: 10px 14px 10px 20px;
+  }
 
-.mobile-menu__links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  padding: 0 40px;
-}
+  /* Hide desktop nav on mobile */
+  .navbar__desktop-only {
+    display: none !important;
+  }
 
-.mobile-menu__link {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 10vw, 4.5rem);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.85);
-  text-decoration: none;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  transition: color 0.3s ease;
+  /* Show hamburger only on mobile */
+  .hamburger {
+    display: flex;
+  }
 }
-
-.mobile-menu__link:last-child {
-  border-bottom: none;
-}
-
-.mobile-menu__link:hover {
-  color: #fff;
-}
-
-.mobile-menu__index {
-  font-family: var(--font-sans, Inter, sans-serif);
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.08em;
-  width: 24px;
-  flex-shrink: 0;
-}
-

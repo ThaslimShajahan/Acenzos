@@ -38,7 +38,7 @@ const ContactPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              Let's build<br/>something <i>iconic</i>.
+              Let's build<br/>something <i>great.</i>
             </motion.h1>
             
             <div className="cp-contact-info">
@@ -47,8 +47,8 @@ const ContactPage = () => {
                 <a href="mailto:hello@acenzos.com">hello@acenzos.com</a>
               </div>
               <div>
-                <h4>Headquarters</h4>
-                <p>Dubai Design District<br/>D3, Building 4<br/>Dubai, UAE</p>
+                <h4>Location</h4>
+                <p>Kerala, India<br/>Available Worldwide</p>
               </div>
             </div>
           </div>

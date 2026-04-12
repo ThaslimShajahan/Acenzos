@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import logoWhite from '../assets/logo/logo-acenzos-white.png';
+import MobileMenu from './MobileMenu';
 import './Navbar.css';
 
 const NAV_LINKS = [
@@ -78,38 +79,8 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* MOBILE FULLSCREEN DRAWER */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            className="mobile-menu"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <nav className="mobile-menu__links">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link
-                    to={link.path}
-                    className={`mobile-menu__link ${location.pathname === link.path ? 'is-active' : ''}`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <span className="mobile-menu__index">{String(i + 1).padStart(2, '0')}</span>
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* MOBILE SEPARATE DRAWER */}
+      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
     </>
   );
 };

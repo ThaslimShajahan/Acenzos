@@ -16,8 +16,8 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Acenzos — Creative Digital Agency</title>
-        <meta name="description" content="Forging digital platforms that pull the future forward." />
+        <title>Acenzos — Shopify Development & AI Products</title>
+        <meta name="description" content="Acenzos builds Shopify storefronts, custom web apps, and AI-powered products like Redber. Based in Kerala, India." />
       </Helmet>
       
       {/* 3D Drone only lives on the Home page */}

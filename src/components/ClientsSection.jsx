@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 import './ClientsSection.css';
 
 const clients = [
-  { name: 'Google',     abbr: 'G' },
-  { name: 'Microsoft',  abbr: 'MS' },
-  { name: 'Amazon',     abbr: 'AMZ' },
-  { name: 'Stripe',     abbr: 'STR' },
-  { name: 'Figma',      abbr: 'FIG' },
-  { name: 'Vercel',     abbr: 'VCL' },
-  { name: 'Notion',     abbr: 'NTN' },
-  { name: 'Linear',     abbr: 'LNR' },
+  { name: 'Haya Resort',   abbr: 'HR' },
+  { name: 'StyleCraft',    abbr: 'SC' },
+  { name: 'Redber AI',     abbr: 'RB' },
+  { name: 'MarketBloom',   abbr: 'MB' },
+  { name: 'PureShop',      abbr: 'PS' },
+  { name: 'TechForge',     abbr: 'TF' },
+  { name: 'LaunchPad',     abbr: 'LP' },
+  { name: 'NovaBrand',     abbr: 'NB' },
 ];
 
 const Track = ({ reverse = false }) => (
@@ -50,14 +50,13 @@ const ClientsSection = () => {
       <div className="wrap">
         <div className="cl-quote">
           <p className="cl-quote-text">
-            "Acenzos delivered a product that exceeded every expectation.
-            Their design sensibility and technical execution were exceptional."
+            "Acenzos rebuilt our Shopify store from the ground up. The result was faster, more beautiful, and our conversion rate jumped 30% in the first month."
           </p>
           <div className="cl-quote-author">
-            <div className="cl-quote-avatar">AS</div>
+            <div className="cl-quote-avatar">MK</div>
             <div>
-              <span className="cl-quote-name">Alex Sentry</span>
-              <span className="cl-quote-role">CPO at BrandForge</span>
+              <span className="cl-quote-name">Mohammed K.</span>
+              <span className="cl-quote-role">Founder, StyleCraft</span>
             </div>
           </div>
         </div>

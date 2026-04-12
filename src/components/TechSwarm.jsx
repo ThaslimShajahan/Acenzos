@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, Environment } from '@react-three/drei';
-import { useScroll } from 'framer-motion';
+import { useScroll, motion } from 'framer-motion';
 import * as THREE from 'three';
 import { droneStore } from '../droneStore';
 import './TechSwarm.css';
@@ -85,21 +85,32 @@ const Drone = ({ scrollYProgress, cfg }) => {
     _target.current.y += windY;
     _target.current.z += windZ;
 
-    // 2. CAPABILITIES SECTION INTERCEPT
-    const { capActiveIndex, capSectionVisible } = droneStore;
+    // 2. INTERCEPTS
+    const { capActiveIndex, capSectionVisible, immSectionVisible } = droneStore;
     const capMode = capSectionVisible;
+    const immMode = immSectionVisible;
 
     if (capMode) {
       const rowYOffsets = [0.6, 0.2, -0.2, -0.6];
       const targetRowY  = capActiveIndex >= 0 ? rowYOffsets[capActiveIndex] : 0;
       // Also apply some wind to the hover mode so it feels alive
       _target.current.set(-2.6 + (windX * 0.5), targetRowY + (windY * 0.5), 0.8 + (windZ * 0.5));
+    } else if (immMode) {
+      // Natural 3D orbital weaving pattern (ellipsoid loop)
+      const loopTime = t * 0.6; 
+      const beeX = Math.sin(loopTime) * 3.2; // Wide side-to-side sweeping
+      const beeY = Math.sin(loopTime * 1.8) * 0.6 + Math.cos(loopTime * 0.9) * 0.3; // Unpredictable bobbing
+      
+      // Orbit depth back and front
+      // -0.8 (behind the text) to +1.4 (in front of the text)
+      const beeZ = Math.cos(loopTime) * 1.1 + 0.3; 
+      _target.current.set(beeX, beeY, beeZ);
     }
 
     // 3. APPLY POSITION SPRING PHYSICS (Smooth movement)
-    // Reduce stiffness slightly so the drone floats and drifts more organically
-    const K = capMode ? 4.0 : 2.5;   // Stiffness
-    const B = capMode ? 0.95 : 0.82; // Damping
+    // When immMode is active, use a slower responsive spring for that natural, majestic glide
+    const K = capMode ? 4.0 : immMode ? 1.5 : 2.5;   // Very loose and slow
+    const B = capMode ? 0.95 : immMode ? 0.96 : 0.82; // High damping prevents jitter
     physVel.current.x += (K * (_target.current.x - physPos.current.x) - B * physVel.current.x) * dt;
     physVel.current.y += (K * (_target.current.y - physPos.current.y) - B * physVel.current.y) * dt;
     physVel.current.z += (K * (_target.current.z - physPos.current.z) - B * physVel.current.z) * dt;
@@ -107,6 +118,19 @@ const Drone = ({ scrollYProgress, cfg }) => {
     physPos.current.x += physVel.current.x * dt;
     physPos.current.y += physVel.current.y * dt;
     physPos.current.z += physVel.current.z * dt;
+
+    // ACTIVE Z-INDEX SANDWICHING
+    // If the drone physically crosses the Z=0 plane (text layer) while in immMode, pop its global z-index!
+    if (immMode) {
+       // Only trigger when safely past the threshold to prevent z-fighting flicker
+       if (Math.abs(physPos.current.z) > 0.1) {
+          const isFront = physPos.current.z > 0;
+          if (window.__droneFrontPhase !== isFront) {
+             window.__droneFrontPhase = isFront;
+             document.body.classList.toggle('drone-front', isFront);
+          }
+       }
+    }
 
     // 4. MANUAL HARDCODED MULTI-PHASE ROTATION (100% stable, no 180-flips)
     let trY, trX, trZ;
@@ -116,6 +140,15 @@ const Drone = ({ scrollYProgress, cfg }) => {
       trY = Math.PI / 6;
       trX = 0.08;
       trZ = 0.02;
+    } else if (immMode) {
+      // Highly dynamic natural banking (like a real small bug changing direction gracefully)
+      const vx = physVel.current.x;
+      const vy = physVel.current.y;
+      const vz = physVel.current.z;
+      
+      trY = vx * 0.35; // Constantly swings head left/right with momentum
+      trX = 0.05 + vz * 0.25 - vy * 0.15; // Dives into forward loops deeply
+      trZ = vx * 0.35 + vz * 0.05; // Banks/rolls heavily into side curves
     } else if (s < 0.35) {
       // Phase 1: Takes off, turns right to fly off screen
       const p = s / 0.35;
@@ -141,7 +174,7 @@ const Drone = ({ scrollYProgress, cfg }) => {
     }
 
     // 5. FOOTER POINTER TRACKING
-    if (!capMode && s > 0.88) {
+    if (!capMode && !immMode && s > 0.88) {
       const blend = THREE.MathUtils.clamp((s - 0.88) / 0.12, 0, 1);
       const pointer = state.pointer;
       const lookY = pointer.x * cfg.trackRange.y;
@@ -159,15 +192,18 @@ const Drone = ({ scrollYProgress, cfg }) => {
     curRotX.current = THREE.MathUtils.lerp(curRotX.current, trX, rotLerp);
     curRotZ.current = THREE.MathUtils.lerp(curRotZ.current, trZ, rotLerp);
 
-    // 7. ORGANIC ROTATION WOBBLE (Micro-stuttering & gyro balancing)
-    // This creates the unpredictable, natural feel of a real drone fighting air currents
+    // 7. ORGANIC ROTATION WOBBLE
     const speed = physVel.current.length();
-    const flightIntensity = THREE.MathUtils.clamp(speed * 0.5, 0.3, 1.2); // Wobbles more when moving fast
+    const flightIntensity = THREE.MathUtils.clamp(speed * 0.5, 0.3, 1.2);
     const wobblePitch = (Math.cos(t * 3.1) + 0.4 * Math.sin(t * 5.4)) * 0.015 * flightIntensity;
     const wobbleRoll  = (Math.sin(t * 2.8) + 0.5 * Math.sin(t * 6.1)) * 0.02 * flightIntensity;
     const wobbleYaw   = (Math.sin(t * 1.9) + 0.3 * Math.cos(t * 4.7)) * 0.01 * flightIntensity;
 
-    // 8. APPLY EVERYTHING
+    // 8. DYNAMIC SCALE (Shrink down to bee-size during immMode)
+    const targetScale = immMode ? cfg.scale * 0.22 : cfg.scale;
+    droneRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), dt * 3.0);
+
+    // 9. APPLY EVERYTHING
     droneRef.current.position.set(
       physPos.current.x,
       physPos.current.y,
@@ -181,7 +217,14 @@ const Drone = ({ scrollYProgress, cfg }) => {
     );
   });
 
-  return <primitive ref={droneRef} object={scene} scale={cfg.scale} />;
+  // Init scale internally so we can lerp it freely
+  useEffect(() => {
+    if (droneRef.current) {
+      droneRef.current.scale.setScalar(cfg.scale);
+    }
+  }, [cfg.scale]);
+
+  return <primitive ref={droneRef} object={scene} />;
 };
 
 // ─────────────────────────────────────────────────────────────────────────────

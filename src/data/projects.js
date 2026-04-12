@@ -3,57 +3,57 @@ export const PROJECTS_DATA = [
     id: 1,
     slug: 'redber',
     title: 'Redber AI',
-    category: 'AI Automation',
+    category: 'AI Product',
     year: '2024',
     color: '#4f46e5',
     tagline: 'The AI Receptionist That Never Sleeps.',
-    overview: 'Redber AI is a cutting-edge conversational platform designed to handle 24/7 business inquiries. It acts as an expert digital employee, capturing leads, booking meetings, and providing instant support with a human-like touch.',
-    challenge: 'Businesses lose over 60% of potential leads after office hours or during high-traffic peaks. Traditional chatbots are rigid, frustrating, and often fail to convert high-intent visitors.',
-    solution: 'We engineered a low-latency LLM orchestration layer that allows Redber to respond in under 3 seconds. By integrating persistent memory and a custom Knowledge Base, we ensured the AI understands specific business nuances better than a human trainee.',
+    overview: 'Redber AI is an AI-powered communication platform built by Acenzos. It handles customer inquiries 24/7, captures leads, books appointments, and provides instant intelligent support — trained on your business knowledge.',
+    challenge: 'Businesses lose over 60% of potential leads after office hours. Traditional chatbots are rigid, frustrating, and fail to convert high-intent visitors into customers.',
+    solution: 'We built a low-latency LLM orchestration layer that lets Redber respond in under 3 seconds. With persistent memory and a custom Knowledge Base, it understands your business better than a human trainee — and never takes a day off.',
     results: [
       { label: 'Uptime', value: '100%' },
       { label: 'Response Time', value: '< 3s' },
       { label: 'Lead Conversion', value: '+40%' }
     ],
     techStack: ['React', 'Node.js', 'PostgreSQL', 'OpenAI API', 'Framer Motion'],
-    nextSlug: 'sohub'
+    nextSlug: 'shopify-storefront'
   },
   {
     id: 2,
-    slug: 'sohub',
-    title: 'SOHub',
-    category: 'Digital Experience',
+    slug: 'shopify-storefront',
+    title: 'Custom Shopify Store',
+    category: 'E-Commerce',
     year: '2024',
-    color: '#7c3aed',
-    tagline: 'Revolutionizing Digital Community Spaces.',
-    overview: 'SOHub is a high-performance immersive platform built to host thousands of simultaneous users in a fluid, 3D-driven environment. It redefines how brands interact with their global audience.',
-    challenge: 'Creating a web-based 3D environment that remains performant across mobile devices while supporting real-time data synchronization for thousands of concurrent users.',
-    solution: 'A custom WebGL rendering engine built on Three.js, optimized with a hybrid state management system. We prioritized raw performance to ensure a 60FPS experience even on mid-range smartphones.',
+    color: '#96bf48',
+    tagline: 'Conversion-First Shopify Experiences.',
+    overview: 'We design and develop high-converting Shopify stores for brands that want more than a template. Custom themes built with Liquid, tailored to each brand\'s identity and customer journey.',
+    challenge: 'Off-the-shelf Shopify themes limit brand potential, have poor LCP scores, and can\'t handle the unique business logic that sets growing brands apart.',
+    solution: 'We develop fully custom Shopify themes from scratch using Liquid, React components, and Shopify Metafields — giving brands complete design freedom with full Shopify platform compatibility.',
     results: [
-      { label: 'Avg Session', value: '12min' },
-      { label: 'User Retention', value: '300%' },
-      { label: 'Peak Capacity', value: '50k+' }
+      { label: 'Page Speed', value: '95+' },
+      { label: 'Conversion', value: '+35%' },
+      { label: 'Bounce Rate', value: '-28%' }
     ],
-    techStack: ['Three.js', 'React Three Fiber', 'WebSockets', 'AWS Lambda'],
-    nextSlug: 'worldquant-foundry'
+    techStack: ['Shopify', 'Liquid', 'Alpine.js', 'Tailwind CSS', 'Shopify APIs'],
+    nextSlug: 'acenzos-platform'
   },
   {
     id: 3,
-    slug: 'worldquant-foundry',
-    title: 'WorldQuant Foundry',
-    category: 'Platform Engineering',
+    slug: 'acenzos-platform',
+    title: 'Acenzos Platform',
+    category: 'SaaS Development',
     year: '2025',
     color: '#0ea5e9',
-    tagline: 'Engineering the Future of Quantitative Finance.',
-    overview: 'WorldQuant Foundry is an enterprise-grade platform that streamlines quantitative research and financial modeling through high-speed distributed computing.',
-    challenge: 'Quant teams needed a secure, reliable way to run massive datasets through complex mathematical models without infrastructure bottlenecks.',
-    solution: 'We built a cloud-native orchestration layer that scales compute resources dynamically based on model complexity, reducing research latency by 70%.',
+    tagline: 'Our In-House SaaS Infrastructure.',
+    overview: 'The internal platform powering all of Acenzos operations — from client project management to product delivery pipelines. Built to be scalable, extensible, and beautifully simple.',
+    challenge: 'Managing multiple concurrent client projects, internal deployments, and product iterations across team members required a centralized, purpose-built tool.',
+    solution: 'We built a modular SaaS backbone with role-based access, real-time collaboration features, and automated delivery pipelines that cut our internal overhead by half.',
     results: [
-      { label: 'Latency', value: '-70%' },
-      { label: 'Compute Efficiency', value: '+55%' },
-      { label: 'Security', value: 'ISO 27001' }
+      { label: 'Efficiency', value: '+50%' },
+      { label: 'Deploy Time', value: '-60%' },
+      { label: 'Team Size', value: 'Lean 5' }
     ],
-    techStack: ['Go', 'Rust', 'Kubernetes', 'Next.js'],
+    techStack: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'Vercel'],
     nextSlug: 'redber'
   }
 ];

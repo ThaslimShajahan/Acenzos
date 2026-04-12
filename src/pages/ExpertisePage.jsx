@@ -7,34 +7,34 @@ import './Pages.css';
 
 const EXPERTISE_AREAS = [
   {
+    id: 'shopify',
+    title: 'Shopify Development',
+    desc: 'We are Shopify experts. From custom Liquid theme development to headless storefronts with Hydrogen, we build e-commerce experiences that are fast, on-brand, and built to convert. We handle migrations, app integrations, and ongoing optimisation.',
+    skills: ['Custom Shopify Themes (Liquid)', 'Hydrogen & Headless Commerce', 'Shopify App Integration', 'Store Migration & Optimisation', 'Shopify Plus', 'Conversion Rate Optimisation']
+  },
+  {
     id: 'engineering',
-    title: 'Platform Engineering',
-    desc: 'We architect complex, scalable software ecosystems. From distributed microservices to high-frequency trading dashboards, our engineering team works with modern tech stacks (React, Node, Go, Rust) to build bomb-proof digital infrastructure.',
-    skills: ['System Architecture', 'API Design & Integration', 'Cloud Infrastructure (AWS/GCP)', 'Web3 & Smart Contracts', 'Headless CMS', 'Mobile App Development']
+    title: 'Custom Development',
+    desc: 'Beyond Shopify, we build full-stack web and mobile applications. From internal tools and dashboards to SaaS platforms, our engineering team uses React, Node.js, and cloud infrastructure to ship products that scale.',
+    skills: ['React & Next.js', 'Node.js API Development', 'Mobile Apps (React Native)', 'Cloud Infrastructure (AWS/GCP)', 'Headless CMS', 'Database Design & Optimisation']
   },
   {
-    id: 'design',
-    title: 'Digital Experience Design',
-    desc: 'We merge brand DNA with best-in-class UX/UI. We build comprehensive design systems that evoke emotion while guiding users flawlessly through complex conversion funnels.',
-    skills: ['UX/UI Design', 'Design Systems (Figma)', '3D & WebGL (Three.js)', 'Motion Prototyping', 'User Interaction Modeling', 'Branding & Identity']
-  },
-  {
-    id: 'growth',
-    title: 'Growth & Strategy',
-    desc: 'Products are only as good as their adoption rate. We act as your fractional growth team, running data-driven sprint cycles to optimize acquisition, retention, and lifetime value.',
-    skills: ['Product Analytics', 'Conversion Rate Optimization (CRO)', 'Technical SEO', 'Go-to-Market Strategy', 'User Retention Looping', 'A/B Testing']
+    id: 'ai',
+    title: 'AI & Automation',
+    desc: 'We build AI-powered tools for businesses — from our own Redber AI platform to custom LLM integrations, chatbots, and workflow automation. Let your business run smarter, not harder.',
+    skills: ['Redber AI Deployment', 'Custom AI Chatbots', 'LLM Integration (OpenAI / Gemini)', 'Lead Capture Automation', 'AI Workflow Automation', 'Knowledge Base Training']
   }
 ];
 
 const PROCESS_STEPS = [
-  { num: '01', title: 'Discovery & Audit', desc: 'We dive deep into your business metrics, technical debt, and market positioning before writing a single line of code.' },
-  { num: '02', title: 'Architecture Planning', desc: 'Laying the foundation. We map out database schemas, API routes, and comprehensive design tokens.' },
-  { num: '03', title: 'Sprints & Engineering', desc: 'Agile, weekly cycles. You see constant iterative progress, not a black box of development.' },
-  { num: '04', title: 'Scale & Retain', desc: 'Post-launch, we shift into growth mode, analyzing user data to constantly improve the platform.' }
+  { num: '01', title: 'Discovery & Brief', desc: 'We start by understanding your business, your customers, and your goals — then define exactly what needs to be built and why.' },
+  { num: '02', title: 'Design & Architecture', desc: 'UI/UX design, technical architecture, and project planning — everything mapped out before a line of code is written.' },
+  { num: '03', title: 'Build & Iterate', desc: 'Agile development with regular check-ins. You see progress weekly, provide feedback, and stay in full control of the outcome.' },
+  { num: '04', title: 'Launch & Retain', desc: 'We don\'t disappear at launch. Post-go-live we monitor, optimise, and continue improving your product over time.' }
 ];
 
 const ExpertisePage = () => {
-  const [openId, setOpenId] = useState('engineering');
+  const [openId, setOpenId] = useState('shopify');
 
   return (
     <motion.div 
@@ -65,7 +65,7 @@ const ExpertisePage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Digital<br/><i>Ecosystems</i>.
+            What we<br/><i>build.</i>
           </motion.h1>
           <motion.p
             className="exp-hero-desc"
@@ -73,7 +73,7 @@ const ExpertisePage = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            We don't just build websites. We architect end-to-end business engines that automate operations, scale revenue, and dominate verticals. Our expertise bridges the gap between deep technical infrastructure and premium aesthetic design.
+            Shopify development, custom web apps, and AI products — we are builders who take ideas from brief to live product. Our expertise spans the full stack, from storefront to server.
           </motion.p>
         </div>
       </section>
@@ -83,7 +83,7 @@ const ExpertisePage = () => {
           
           <div className="exp-sticky-col">
             <h2 className="exp-side-title">Our Practice Areas</h2>
-            <p className="exp-side-desc">Click through our core pillars of capability. Each operates as an independent pod of extreme specialization, but they converge to build category-defining products.</p>
+            <p className="exp-side-desc">Three core pillars: Shopify development, custom engineering, and AI automation. Together they cover the full spectrum of what modern businesses need to grow online.</p>
           </div>
 
           <div className="exp-accordions">

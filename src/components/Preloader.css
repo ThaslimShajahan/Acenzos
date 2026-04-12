@@ -24,20 +24,31 @@
   width: 100%;
 }
 
-.preloader__logo {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  opacity: 0.9;
+.preloader__greeting-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  min-height: 80px;
 }
 
-.preloader__counter {
-  font-family: var(--font-serif);
-  font-size: 4rem;
+.preloader__dot {
+  color: var(--accent);
+  font-size: 1.5rem;
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(2px);
+}
+
+.preloader__greeting-text {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 500;
   line-height: 1;
   color: #fff;
-  font-weight: 400;
   letter-spacing: -0.02em;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .preloader__bar-container {

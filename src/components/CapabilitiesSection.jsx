@@ -10,37 +10,37 @@ import './CapabilitiesSection.css';
 const services = [
   {
     id: 1, num: '01',
-    title: 'Digital Products',
-    tags: ['Web Apps', 'Mobile', 'SaaS', 'Dashboard'],
-    desc: 'We design and build web and mobile applications that scale. From complex enterprise SaaS to consumer-grade products — intuitive, fast, and pixel-perfect.',
+    title: 'Shopify Development',
+    tags: ['Custom Themes', 'Liquid', 'Shopify APIs', 'Performance'],
+    desc: 'We build bespoke Shopify storefronts that convert. Custom Liquid themes, headless commerce with Hydrogen, and app integrations — tailored to each brand\'s unique needs.',
     img: img1,
   },
   {
     id: 2, num: '02',
-    title: 'Brand & Identity',
-    tags: ['Logo', 'Design System', 'Collateral', 'Motion'],
-    desc: 'We shape brand worlds — visual systems that communicate who you are and what you stand for, with consistency across every surface.',
+    title: 'Web & App Development',
+    tags: ['React', 'Node.js', 'Next.js', 'Mobile'],
+    desc: 'From complex dashboards to consumer apps — we architect scalable full-stack products using modern tech stacks, built to perform and grow with your business.',
     img: img2,
   },
   {
     id: 3, num: '03',
-    title: '3D & Immersive',
-    tags: ['WebGL', 'Three.js', '3D Render', 'AR'],
-    desc: 'Breathtaking 3D environments, real-time WebGL experiences, and interactive renders that make your brand impossible to ignore.',
+    title: 'AI & Automation',
+    tags: ['Redber AI', 'LLM Integration', 'Chatbots', 'Workflows'],
+    desc: 'We integrate AI into your business operations. Whether it\'s deploying Redber as your AI receptionist or building custom LLM pipelines, we automate the repetitive so you can focus on growth.',
     img: img3,
   },
   {
     id: 4, num: '04',
-    title: 'Growth & Marketing',
-    tags: ['SEO', 'CRO', 'Campaigns', 'Analytics'],
-    desc: 'Data-led strategies that drive qualified traffic, convert visitors, and build long-term brand equity across every digital channel.',
+    title: 'Brand & UI/UX Design',
+    tags: ['Brand Identity', 'UI Systems', 'Figma', 'Motion'],
+    desc: 'Brands that look great and feel right. We design visual identities, comprehensive design systems, and pixel-perfect interfaces that express your brand and delight your users.',
     img: img4,
   },
 ];
 
 const marqueeItems = [
-  'DESIGN', 'ENGINEERING', 'STRATEGY', 'BRANDING', 'MOTION',
-  'DESIGN', 'ENGINEERING', 'STRATEGY', 'BRANDING', 'MOTION',
+  'SHOPIFY', 'DEVELOPMENT', 'AI PRODUCTS', 'DESIGN', 'AUTOMATION',
+  'SHOPIFY', 'DEVELOPMENT', 'AI PRODUCTS', 'DESIGN', 'AUTOMATION',
 ];
 
 const CapabilitiesSection = () => {
@@ -86,14 +86,14 @@ const CapabilitiesSection = () => {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.72, ease: [0.16,1,0.3,1] }}
             >
-              <p className="eyebrow cap-eyebrow" style={{ color: 'var(--text-dark-3)' }}>Our Capabilities</p>
+              <p className="eyebrow cap-eyebrow" style={{ color: 'var(--text-dark-3)' }}>What We Build</p>
               <h2 className="cap-heading-display">
-                What we do<br />
-                <span className="text-muted-dark">for you.</span>
+                Products that<br />
+                <span className="text-muted-dark">drive results.</span>
               </h2>
               <p className="cap-desc cap-desc-modern">
-                We operate at the intersection of design, technology, and strategy —
-                delivering end-to-end digital experiences that define categories and leave lasting impact.
+                From Shopify storefronts to AI-powered tools — we build and ship software
+                that solves real business problems and scales with your ambitions.
               </p>
             </motion.div>
           </div>

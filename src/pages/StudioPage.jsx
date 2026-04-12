@@ -5,10 +5,10 @@ import CTASection from '../components/CTASection';
 import './Pages.css';
 
 const TEAM_STATS = [
-  { label: 'Founded', value: '2023' },
-  { label: 'Locations', value: 'DUBAI / REMOTE' },
-  { label: 'Global Partners', value: '40+' },
-  { label: 'Industry Awards', value: '12' }
+  { label: 'Founded', value: '2022' },
+  { label: 'Location', value: 'KERALA, INDIA' },
+  { label: 'Core Products', value: '3+' },
+  { label: 'Shopify Stores Built', value: '20+' }
 ];
 
 const StudioPage = () => {
@@ -41,7 +41,7 @@ const StudioPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Creative<br/><i>Culture</i>.
+            About<br/><i>Acenzos.</i>
           </motion.h1>
         </div>
       </section>
@@ -57,7 +57,7 @@ const StudioPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              We are a privately held design & engineering collective operating at the bleeding edge of the digital economy. We don't hire employees; we partner with masters of their craft.
+              We are a small, focused team of builders based in Kerala, India. We specialise in Shopify development and in-house product creation. Our in-house AI product, Redber, is used by businesses across the region to automate customer communication.
             </motion.h2>
           </div>
 
@@ -98,16 +98,16 @@ const StudioPage = () => {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <a href="mailto:careers@acenzos.com" style={{ display: 'flex', justifyContent: 'space-between', padding: '30px', border: '1px solid var(--border)', borderRadius: 'var(--r-sm)', textDecoration: 'none', color: 'var(--text)', transition: 'background 0.3s' }} onMouseOver={e => e.currentTarget.style.background = 'var(--bg-white)'} onMouseOut={e => e.currentTarget.style.background = 'transparent'}>
-                  <h4 style={{ fontSize: '1.2rem' }}>Senior Full-Stack Engineer (React/Go)</h4>
+                  <h4 style={{ fontSize: '1.2rem' }}>Shopify Developer (Liquid / Hydrogen)</h4>
                   <span style={{ color: 'var(--text-3)' }}>Remote</span>
                 </a>
                 <a href="mailto:careers@acenzos.com" style={{ display: 'flex', justifyContent: 'space-between', padding: '30px', border: '1px solid var(--border)', borderRadius: 'var(--r-sm)', textDecoration: 'none', color: 'var(--text)', transition: 'background 0.3s' }} onMouseOver={e => e.currentTarget.style.background = 'var(--bg-white)'} onMouseOut={e => e.currentTarget.style.background = 'transparent'}>
-                  <h4 style={{ fontSize: '1.2rem' }}>Creative Director / Brand </h4>
-                  <span style={{ color: 'var(--text-3)' }}>Dubai</span>
+                  <h4 style={{ fontSize: '1.2rem' }}>Full-Stack React / Node.js Developer</h4>
+                  <span style={{ color: 'var(--text-3)' }}>Remote</span>
                 </a>
                 <a href="mailto:careers@acenzos.com" style={{ display: 'flex', justifyContent: 'space-between', padding: '30px', border: '1px solid var(--border)', borderRadius: 'var(--r-sm)', textDecoration: 'none', color: 'var(--text)', transition: 'background 0.3s' }} onMouseOver={e => e.currentTarget.style.background = 'var(--bg-white)'} onMouseOut={e => e.currentTarget.style.background = 'transparent'}>
-                  <h4 style={{ fontSize: '1.2rem' }}>WebGL / Three.js Developer</h4>
-                  <span style={{ color: 'var(--text-3)' }}>Remote</span>
+                  <h4 style={{ fontSize: '1.2rem' }}>UI/UX Designer (Figma)</h4>
+                  <span style={{ color: 'var(--text-3)' }}>Kerala / Remote</span>
                 </a>
               </div>
            </div>

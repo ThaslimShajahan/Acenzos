@@ -46,8 +46,8 @@ const WorkPage = () => {
             style={{ marginTop: '40px', maxWidth: '600px' }}
           >
             <p className="hero-sub--dark text-muted-dark" style={{ fontSize: '1.2rem', lineHeight: '1.6' }}>
-              We've partnered with industry leaders, ambitious startups, and visionary founders to engineer products that don't just participate in markets, but completely redefine them. 
-              Our work spans FinTech, Web3, Enterprise SaaS, and hyper-growth consumer tech.
+              We build Shopify storefronts, custom web applications, and in-house AI products.
+              Every project is tackled with the same obsession: great design, clean code, and measurable outcomes for our clients.
             </p>
           </motion.div>
         </div>
@@ -92,14 +92,14 @@ const WorkPage = () => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
             <div>
               <p className="eyebrow eyebrow-dark">Our Methodology</p>
-              <h2 className="h-xl h-white" style={{ fontSize: '3.5rem' }}>Iterate.<br/><i>Validate</i>. Scale.</h2>
+              <h2 className="h-xl h-white" style={{ fontSize: '3.5rem' }}>Build.<br/><i>Launch</i>. Grow.</h2>
             </div>
             <div>
               <p className="hero-sub--dark text-muted-dark" style={{ fontSize: '1.1rem', marginBottom: '30px' }}>
-                A successful digital product is never truly "finished." It is an evolving asset. We approach every engagement with a mindset geared toward long-term sustainability.
+                Every product we build is launched with a clear growth plan. We don't stop at "done" — we iterate, measure, and optimise until the numbers prove it.
               </p>
               <p className="hero-sub--dark text-muted-dark" style={{ fontSize: '1.1rem' }}>
-                We don't believe in handing over a codebase and walking away. Our retainer models ensure that we remain integrated as your dedicated fractional engineering and design wing, pushing weekly iterations to keep your platform ahead of the competition.
+                Whether it's a Shopify store or a custom-built SaaS, we stay with you post-launch to ensure the product keeps improving, keeps converting, and keeps growing.
               </p>
             </div>
           </div>

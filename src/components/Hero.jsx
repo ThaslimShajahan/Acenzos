@@ -6,15 +6,15 @@ const ease = [0.16, 1, 0.3, 1];
 
 /* ── Floating tech nodes for the isometric grid ── */
 const GRID_NODES = [
-  { id: 1, label: 'React',      icon: '⚛',  x: 10,  y: 16,  size: 'lg', delay: 0.20, color: '#61dafb' },
-  { id: 2, label: 'Node.js',    icon: '⬡',  x: 62,  y: 8,   size: 'md', delay: 0.32, color: '#68a063' },
-  { id: 3, label: 'TypeScript', icon: 'TS', x: 82,  y: 26,  size: 'sm', delay: 0.44, color: '#3178c6' },
-  { id: 4, label: 'AWS',        icon: '☁',  x: 72,  y: 52,  size: 'md', delay: 0.52, color: '#ff9900' },
+  { id: 1, label: 'Shopify',    icon: '⬡',  x: 10,  y: 16,  size: 'lg', delay: 0.20, color: '#96bf48' },
+  { id: 2, label: 'React',      icon: '⚛',  x: 62,  y: 8,   size: 'md', delay: 0.32, color: '#61dafb' },
+  { id: 3, label: 'Node.js',    icon: '⬡',  x: 82,  y: 26,  size: 'sm', delay: 0.44, color: '#68a063' },
+  { id: 4, label: 'OpenAI',     icon: '✦',  x: 72,  y: 52,  size: 'md', delay: 0.52, color: '#a855f7' },
   { id: 5, label: 'Figma',      icon: '◈',  x: 5,   y: 58,  size: 'sm', delay: 0.60, color: '#f24e1e' },
   { id: 6, label: 'Next.js',    icon: 'N',  x: 38,  y: 78,  size: 'md', delay: 0.68, color: '#ffffff' },
-  { id: 7, label: 'AI / ML',    icon: '✦',  x: 72,  y: 80,  size: 'lg', delay: 0.76, color: '#a855f7' },
-  { id: 8, label: 'Docker',     icon: '🐳', x: 22,  y: 36,  size: 'sm', delay: 0.84, color: '#2496ed' },
-  { id: 9, label: 'GraphQL',    icon: '◉',  x: 48,  y: 44,  size: 'sm', delay: 0.90, color: '#e535ab' },
+  { id: 7, label: 'Redber AI',  icon: '🤖', x: 72,  y: 80,  size: 'lg', delay: 0.76, color: '#a855f7' },
+  { id: 8, label: 'Liquid',     icon: '{}', x: 22,  y: 36,  size: 'sm', delay: 0.84, color: '#2496ed' },
+  { id: 9, label: 'Vercel',     icon: '▲',  x: 48,  y: 44,  size: 'sm', delay: 0.90, color: '#e535ab' },
 ];
 
 /* Glass-card node component */
@@ -66,7 +66,7 @@ const Hero = () => {
           transition={{ duration: 0.7, ease }}
         >
           <span className="hero-badge-dot" />
-          Software Engineering &amp; Digital Innovation
+          Shopify Experts &amp; In-House Product Builders
         </motion.p>
 
         <motion.h1
@@ -75,9 +75,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1, ease }}
         >
-          We build<br />
-          modern<br />
-          <em>platforms.</em>
+          We craft<br />
+          digital<br />
+          <em>products.</em>
         </motion.h1>
 
         <motion.div
@@ -87,8 +87,8 @@ const Hero = () => {
           transition={{ duration: 0.72, delay: 0.3, ease }}
         >
           <p className="hero-sub hero-sub--dark">
-            From concept to deployment — we architect scalable platforms,
-            stunning interfaces, and intelligent systems for ambitious companies.
+            From Shopify storefronts to AI-powered products like Redber —
+            we build software that solves real problems and drives revenue.
           </p>
           <div className="hero-actions">
             <a href="#work"    className="btn hero-btn hero-btn--primary" id="hero-cta-work">

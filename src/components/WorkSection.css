@@ -3,7 +3,7 @@
    ======================== */
 .work-section {
   background:    var(--bg);
-  padding:       108px 0 128px;
+  padding:       var(--pad-y) 0;
   border-bottom: 1px solid var(--border);
   position:      relative;
   z-index:       5;

@@ -381,7 +381,7 @@
 
 .stat-val {
   font-family: var(--font-serif);
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
   font-weight: 400;
   line-height: 1;
 }
@@ -428,6 +428,13 @@
   .sg-tall, .sg-wide {
     grid-row: span 1;
     grid-column: span 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .studio-stats {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
 }
 
@@ -567,7 +574,7 @@
 
 .cs-display {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 12vw, 10rem);
+  font-size: clamp(2.5rem, 12vw, 10rem);
   font-weight: 400;
   color: #fff;
   line-height: 0.9;
@@ -576,7 +583,7 @@
 }
 
 .cs-tagline {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
   color: rgba(255, 255, 255, 0.8);
   max-width: 600px;
   line-height: 1.4;
@@ -719,7 +726,7 @@
 
 .next-title {
   font-family: var(--font-serif);
-  font-size: 5rem;
+  font-size: clamp(2rem, 8vw, 5rem);
   color: #fff;
   transition: transform 0.4s var(--ease);
 }
@@ -733,14 +740,8 @@
     grid-template-columns: 1fr;
     gap: 60px;
   }
-  .cs-display {
-    font-size: 5rem;
-  }
   .cs-next-section {
     padding: 80px 0;
-  }
-  .next-title {
-    font-size: 3rem;
   }
 }
 

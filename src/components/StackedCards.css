@@ -40,10 +40,14 @@
   text-transform:uppercase; color: var(--text-2); text-align: center;
 }
 
-@media (max-width:640px) {
-  .statsbar-inner { flex-wrap: wrap; gap: 8px; }
-  .statsbar-item  { flex: 1 1 calc(50% - 4px); }
+@media (max-width: 768px) {
+  .statsbar { padding: 40px 0; }
+  .statsbar-inner { flex-wrap: wrap; gap: 0; }
+  .statsbar-item  { flex: 1 1 50%; padding: 20px 16px; border-bottom: 1px solid var(--border); }
   .statsbar-item + .statsbar-item::before { display: none; }
+  .statsbar-item:nth-child(odd)  { border-right: 1px solid var(--border); }
+  .statsbar-item:nth-child(3),
+  .statsbar-item:nth-child(4) { border-bottom: none; }
 }
 
 /* ══ ABOUT ══ */
@@ -81,7 +85,8 @@
 }
 .about-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,0,0,0.18); }
 
-@media (max-width:900px) { .about-inner { grid-template-columns:1fr; gap:36px; } }
+@media (max-width:900px)  { .about-inner { grid-template-columns:1fr; gap:36px; } }
+@media (max-width:600px)  { .about-desc { font-size: 0.96rem; } .about-cta { width: 100%; justify-content: center; } }
 
 /* ══ WORK ══ */
 .work-section {
@@ -150,6 +155,12 @@
   .work-wrap { flex-direction: column; gap: 28px; }
   .work-left-pinned { position: static; flex: none; }
   .work-index-list { display: none; }
+}
+@media (max-width: 600px) {
+  .work-section { padding: 64px 0 72px; }
+  .work-slide-img-wrap { aspect-ratio: 4 / 3; border-radius: var(--r-sm); }
+  .work-slide-overlay { padding: 14px 16px; }
+  .work-slide-title { font-size: 1.3rem; }
 }
 
 /* ══ CAPABILITIES (Dual Column Sticky) ══ */
@@ -228,6 +239,23 @@
 .cap-marquee-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.10); flex-shrink: 0; }
 @keyframes marquee-run { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+/* Capabilities responsive */
+@media (max-width: 1024px) {
+  .cap-layout-grid { grid-template-columns: 1fr; gap: 48px; }
+  .cap-sticky-col   { position: static; }
+  .cap-desc-modern  { max-width: 100%; }
+}
+@media (max-width: 600px) {
+  .cap-section { padding: 64px 0; }
+  .cap-row-top  { padding: 18px 0; gap: 12px; }
+  .cap-row:hover .cap-row-top { transform: none; }
+  .cap-row-left { gap: 14px; }
+  .cap-row-title { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+  .cap-row-body  { padding: 0 0 20px; flex-direction: column; gap: 16px; }
+  .cap-row-img   { flex: none; width: 100%; height: 180px; }
+  .cap-marquee-strip { margin-top: 40px; padding-top: 28px; }
+}
+
 @media (max-width:900px) {
   .cap-header-inner { flex-direction: column; align-items: flex-start; gap: 18px; }
   .cap-header-right { flex: none; }
@@ -279,17 +307,34 @@
 .cl-quote-name { display: block; font-size: 0.88rem; font-weight: 700; color: var(--text); }
 .cl-quote-role { display: block; font-size: 0.74rem; color: var(--text-2); margin-top: 1px; }
 
-/* ══ SERVICES (Sohub Stacking) ══ */
+/* ══ SERVICES (Split Stacking for Drone Blur) ══ */
+.svc-layer-group {
+  position: relative;
+  display: grid; /* Forces both sticky elements into exact same spatial context */
+}
+
+.svc-layer-bg {
+  grid-area: 1 / 1;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 20; /* Behind Drone (z=50) */
+  background: var(--bg-dark);
+  pointer-events: none;
+}
+
 .svc-section { 
-  background: var(--bg-dark); 
+  grid-area: 1 / 1;
+  background: transparent; 
   padding: var(--pad-y) 0; 
   position: sticky; 
   top: 0; 
-  z-index: 20; 
   min-height: 100vh;
+  z-index: 60; /* Above Drone (z=50) so background-filter blends with drone! */
   box-shadow: 0 -30px 60px rgba(0,0,0,0.9);
   border-top: 1px solid rgba(255,255,255,0.06); 
 }
+.svc-section .wrap { position: relative; }
 .svc-header { margin-bottom: 52px; }
 .svc-heading { color: var(--text-dark); }
 .svc-heading .text-muted-dark { color: var(--text-dark-2); }
@@ -320,9 +365,10 @@
 .svc-card--small { grid-column: span 4; min-height: 230px; }
 .svc-card--wide  { grid-column: span 7; min-height: 230px; }
 .svc-card {
-  position: relative; border-radius: var(--r-md); padding: 36px;
+  position: relative; border-radius: 0; padding: 36px;
   overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
-  border: 1px solid var(--border-dark); box-shadow: 0 10px 40px rgba(0,0,0,0.5); background: var(--bg-dark-card);
+  border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 10px 40px rgba(0,0,0,0.3); background: rgba(20, 24, 34, 0.15);
+  backdrop-filter: blur(10px) saturate(150%); -webkit-backdrop-filter: blur(10px) saturate(150%);
   transition: transform 0.42s var(--ease), border-color 0.3s, box-shadow 0.3s; cursor: pointer;
 }
 .svc-card:hover { transform: translateY(-5px); border-color: var(--border-dark-2); box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
@@ -357,12 +403,22 @@
 
 /* ══ WORLDQUANT ETHOS (Sohub Stacking) ══ */
 .wqf-section-outer { 
-  background: var(--bg-dark); 
+  background: transparent; 
   position: relative; 
-  z-index: 30; 
   min-height: 100vh;
   box-shadow: 0 -30px 60px rgba(0,0,0,0.9); 
   border-top: 1px solid rgba(255,255,255,0.06);
+}
+.wqf-section-outer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bg-dark);
+  z-index: 40; /* Behind TechSwarm (50) */
+}
+.wqf-section-inner {
+  position: relative;
+  z-index: 60; /* Above TechSwarm (50) */
 }
 .wqf-container { max-width: 1440px; margin: 0 auto; padding: var(--pad-y) var(--pad-x); }
 .wqf-intro-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 52px; margin-bottom: 56px; }
@@ -384,8 +440,13 @@
 .wqf-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
 .wqf-card {
   position: relative; padding: 38px 34px; overflow: hidden;
-  border: 1px solid transparent; min-height: 248px;
-  display: flex; flex-direction: column; justify-content: flex-end; background: var(--bg-dark-card);
+  border: 1px solid rgba(255, 255, 255, 0.12); min-height: 248px;
+  display: flex; flex-direction: column; justify-content: flex-end; 
+  background: rgba(20, 24, 34, 0.15); /* 15% transparent for much higher visibility of the drone behind */
+  backdrop-filter: blur(10px) saturate(150%); /* Nice balanced blur */
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border-radius: 0; /* Sharp edges */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
   transition: border-color 0.4s, transform 0.4s var(--ease), box-shadow 0.4s;
 }
 .wqf-card:hover { border-color: rgba(255,255,255,0.02); box-shadow: 0 20px 40px rgba(0,0,0,0.6); transform: translateY(-4px); }
@@ -406,10 +467,11 @@
 .wqf-br { bottom: 0; right: 0; border-bottom: 1px solid var(--border-dark-2); border-right: 1px solid var(--border-dark-2); }
 .wqf-card:hover .wqf-bracket { border-color: rgba(255,255,255,0.4); }
 
-.iq-bg-black { background: var(--bg-dark-card); }
-.iq-bg-teal  { background: var(--bg-dark-card); }
-.iq-bg-terra { background: var(--bg-dark-card); }
-.iq-bg-grey  { background: var(--bg-dark-card); }
+/* Removed opaque backgrounds to allow glassmorphism to show through */
+.iq-bg-black { }
+.iq-bg-teal  { }
+.iq-bg-terra { }
+.iq-bg-grey  { }
 .wqf-card-content { position: relative; z-index: 2; }
 .wqf-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
 .wqf-title { font-size: clamp(1.1rem,2vw,1.4rem); font-weight: 600; letter-spacing: -0.016em; color: var(--text-dark); line-height: 1.2; }
@@ -421,65 +483,35 @@
   .wqf-grid { grid-template-columns: 1fr; }
 }
 
-/* ══ IMMERSIVE (Sohub Stacking) ══ */
-.immersive-container { 
+/* ══ IMMERSIVE (Split Stacking) ══ */
+.immersive-layer-group {
+  position: relative;
+  display: grid;
+}
+
+.immersive-bg {
+  grid-area: 1 / 1;
   position: sticky; top: 0; height: 100vh; z-index: 40;
   background: var(--bg-dark); 
+  pointer-events: none;
+}
+
+.immersive-container { 
+  grid-area: 1 / 1;
+  position: sticky; top: 0; min-height: 100vh; z-index: 70;
+  background: transparent; 
   box-shadow: 0 -30px 60px rgba(0,0,0,0.9); 
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 .immersive-sticky { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .immersive-content-wrapper { text-align: center; max-width: 800px; padding: 0 32px; display: flex; flex-direction: column; align-items: center; }
 .immersive-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dark-3); margin-bottom: 24px; }
-.immersive-huge-title { font-family: var(--font-serif); font-size: clamp(4rem,10vw,8rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1; color: var(--text-dark); padding-bottom: 16px; }
+.immersive-huge-title { font-family: var(--font-serif); font-size: clamp(3rem,10vw,8rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1; color: var(--text-dark); padding-bottom: 16px; }
 .immersive-huge-title i { font-style: italic; }
 .immersive-text-front-wrapper { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-.immersive-text-front { text-align: center; max-width: 600px; padding: 0 32px; }
-.immersive-text-front p { font-size: 1.1rem; line-height: 1.8; color: var(--text-dark-2); margin-top: 24px; margin-bottom: 32px; }
+.immersive-text-front { font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-top: 24px; margin-bottom: 32px; text-align: center; max-width: 600px; padding: 0 32px; }
 
-/* ══ CTA (Sohub Stacking Final Layer) ══ */
-.cta-section {
-  position: relative; z-index: 50; 
-  background: var(--bg-dark-card); padding: var(--pad-y) 0;
-  border-top: none; /* Removed the harsh white line */
-}
-
-/* Smoke Wave Fade Effect spanning strictly from transparent to dark */
-.cta-section::before {
-  content: '';
-  position: absolute;
-  top: -200px; /* Taller fade for smoother transition */
-  left: 0;
-  right: 0;
-  height: 200px;
-  /* Multi-stop gradient prevents the "grey smudge" by keeping purity longer */
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(17, 17, 16, 0.05) 50%,
-    rgba(17, 17, 16, 0.2) 70%,
-    rgba(17, 17, 16, 0.6) 85%,
-    var(--bg-dark-card) 100%
-  );
-  pointer-events: none;
-  z-index: -1;
-}
-.cta-inner { display: flex; flex-direction: column; max-width: 780px; }
-.cta-heading { font-family: var(--font-serif); font-size: clamp(3.5rem,9vw,8rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.01; color: var(--text-dark); margin: 14px 0 24px; }
-.cta-sub { font-size: 1.04rem; line-height: 1.74; color: var(--text-dark-2); margin-bottom: 44px; }
-.cta-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
-.cta-btn { font-size: 0.86rem; font-weight: 600; }
-.cta-btn.btn-dark { background: var(--text-dark); color: var(--bg-dark); }
-.cta-btn.btn-dark:hover { box-shadow: 0 8px 28px rgba(255,255,255,0.20); }
-.btn-icon { font-size: 0.90rem; }
-.secondary-btn { background: rgba(255,255,255,0.04); color: var(--text-dark-2); border: 1px solid var(--border-dark-2); }
-.secondary-btn:hover { color: var(--text-dark); background: rgba(255,255,255,0.08); }
-.cta-email-large {
-  font-size: clamp(1.1rem,3vw,2rem); font-weight: 400;
-  color: var(--text-dark-2); border-bottom: 1px solid var(--border-dark-2);
-  padding-bottom: 4px; transition: color 0.22s, border-color 0.22s;
-}
-.cta-email-large:hover { color: var(--text-dark); border-color: var(--text-dark); }
+/* CTA section styles moved to CTASection.css */
 
 /* ══ FOOTER ══ */
 .ac-footer { background: var(--bg-dark); border-top: 1px solid var(--border-dark); padding: 76px 0 40px; }

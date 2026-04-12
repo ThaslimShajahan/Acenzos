@@ -3,25 +3,37 @@ import { motion } from 'framer-motion';
 import logoLine from '../assets/logo/logo-acenzos-white.png';
 import './Preloader.css';
 
+const greetings = [
+  "Hello", "Bonjour", "Hola", "Ciao", "Olá", 
+  "Namaste", "Ahalan", "Privet", "Ni Hao", 
+  "Konnichiwa", "Guten Tag", "Hallo", "안녕하세요", "Acenzos"
+];
+
 const Preloader = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Artificial loading progression
-    let start = 0;
-    const interval = setInterval(() => {
-      start += Math.floor(Math.random() * 8) + 4;
-      if (start >= 100) {
-        start = 100;
-        clearInterval(interval);
-        setTimeout(() => {
-          onComplete(); 
-        }, 600); // Wait a beat at 100% before triggering exit
-      }
-      setProgress(start);
-    }, 80);
+    // Artificial loading progression - hold 'Hello' for 1 second first
+    let interval;
+    const timeout = setTimeout(() => {
+      let start = 0;
+      interval = setInterval(() => {
+        start += Math.floor(Math.random() * 8) + 4;
+        if (start >= 100) {
+          start = 100;
+          clearInterval(interval);
+          setTimeout(() => {
+            onComplete(); 
+          }, 600); // Wait a beat at 100% before triggering exit
+        }
+        setProgress(start);
+      }, 80);
+    }, 1000);
     
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
   }, [onComplete]);
 
   return (
@@ -33,28 +45,22 @@ const Preloader = ({ onComplete }) => {
     >
       <div className="preloader__content">
         <motion.div 
-          className="preloader__logo-wrapper"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <img src={logoLine} alt="Acenzos Studio" className="preloader__logo" />
-        </motion.div>
-        
-        <motion.div 
-          className="preloader__counter"
+          className="preloader__greeting-wrapper"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          transition={{ duration: 0.6 }}
         >
-          {progress}%
+          <span className="preloader__dot">•</span>
+          <h1 className="preloader__greeting-text">
+            {greetings[Math.floor((progress / 100) * (greetings.length - 1))]}
+          </h1>
         </motion.div>
         
         <div className="preloader__bar-container">
           <motion.div 
             className="preloader__bar" 
             animate={{ width: `${progress}%` }} 
-            transition={{ ease: "linear" }}
+            transition={{ ease: "linear", duration: 0.1 }}
           />
         </div>
       </div>

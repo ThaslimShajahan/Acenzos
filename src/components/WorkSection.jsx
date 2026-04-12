@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import img1 from '../assets/imgs/3175466.jpg';
@@ -12,36 +12,36 @@ const PROJECTS = [
     id: 1,
     slug: 'redber',
     title: 'Redber AI',
-    category: 'AI Automation',
+    category: 'AI Product',
     year: '2024',
-    tags: ['Conversational AI', 'CRM Integration', '24/7 Support'],
+    tags: ['Conversational AI', 'Lead Capture', '24/7 Automation'],
     img: img1
   },
   {
     id: 2,
-    slug: 'sohub',
-    title: 'SOHub',
-    category: 'Digital Experience',
+    slug: 'shopify-storefront',
+    title: 'Shopify Storefront',
+    category: 'E-Commerce',
     year: '2024',
-    tags: ['Three.js', 'Immersive UI', 'Experimental'],
+    tags: ['Shopify', 'Liquid', 'Custom Theme'],
     img: img2
   },
   {
     id: 3,
-    slug: 'worldquant-foundry',
-    title: 'WorldQuant Foundry',
-    category: 'Platform Engineering',
+    slug: 'acenzos-platform',
+    title: 'Acenzos Platform',
+    category: 'SaaS Development',
     year: '2025',
-    tags: ['Big Data', 'FinTech', 'Infrastructure'],
+    tags: ['React', 'Node.js', 'PostgreSQL'],
     img: img3
   },
   {
     id: 4,
-    slug: 'aura-protocol',
-    title: 'Aura Protocol',
-    category: 'Web3 & Financial',
+    slug: 'client-dashboard',
+    title: 'Client Dashboard',
+    category: 'Web Application',
     year: '2024',
-    tags: ['Blockchain', 'DeFi', 'Security'],
+    tags: ['Analytics', 'Real-time', 'Custom UI'],
     img: img4
   }
 ];
@@ -72,8 +72,8 @@ const WorkSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Crafting Digital <br />
-              <span className="text-muted">Benchmarks</span>.
+              Products we've <br />
+              <span className="text-muted">built & launched.</span>
             </motion.h2>
 
             <div className="work-index-list">

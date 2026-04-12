@@ -6,11 +6,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  z-index: 50; /* Sits above standard backgrounds, below interactive content layers */
+  z-index: 50; /* Drone flies over other sections naturally */
   pointer-events: none !important; /* Critical so users can still click the website underneath */
   overflow: hidden;
+}
+
+body.drone-front .tech-swarm-canvas-container {
+  z-index: 95 !important;
 }
 
 .tech-swarm-canvas-container canvas {

@@ -4,30 +4,30 @@ import './WorldQuantSection.css';
 
 const EthosData = [
   {
-    title:   'Exponential Foresight',
+    title:   'Shopify First',
     number:  '01 / 04',
-    text:    'We spot industry trends before they permeate the mainstream. We transform them into products that matter — some call it foresight, we call it pattern recognition at scale.',
+    text:    'Shopify powers over $700B in commerce. We\'re Shopify experts — building custom storefronts, app integrations, and headless experiences that drive real revenue for our clients.',
     bgClass: 'iq-bg-black',
-    accent:  '#4f8eff',
+    accent:  '#96bf48',
   },
   {
-    title:   'Full-Stack Support',
+    title:   'Products We Own',
     number:  '02 / 04',
-    text:    'Brand, marketing, performance, legal, ops, finance, and development. Tech founders need tailored support — a dedicated team from day one.',
+    text:    'We don\'t just build for clients. Redber AI is our own in-house product — an AI receptionist that helps businesses capture leads and automate customer support around the clock.',
     bgClass: 'iq-bg-teal',
-    accent:  '#1ed8a0',
+    accent:  '#4f46e5',
   },
   {
-    title:   'Financial Stability',
+    title:   'Speed to Market',
     number:  '03 / 04',
-    text:    'Breakthrough thinking should never compete with rent. Focused founders build better products. We handle the scaffolding so you can focus on what matters.',
+    text:    'We move fast without cutting corners. Our internal frameworks and Shopify expertise let us go from brief to live storefront in weeks, not months — giving clients a real competitive edge.',
     bgClass: 'iq-bg-terra',
     accent:  '#ff7a52',
   },
   {
-    title:   'Intelligent Iteration',
+    title:   'Long-Term Partners',
     number:  '04 / 04',
-    text:    'Know what you want to build? Start today. No drawn-out programs or slow-moving curricula. Just ruthless focus on product-market fit and market entry.',
+    text:    'We don\'t hand off and disappear. Our clients stay with us because we stay invested — iterating, improving, and growing alongside their business on an ongoing basis.',
     bgClass: 'iq-bg-grey',
     accent:  '#b97aff',
   },
@@ -41,11 +41,7 @@ const WorldQuantSection = () => {
     offset: ['start 80%', 'start 30%'],
   });
 
-  const clipPath = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ['inset(0 100% 0 0)', 'inset(0 0% 0 0)']
-  );
+  // Removed clipPath to prevent backdrop-filter isolation
 
   // Mouse Spotlight Effect State
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -60,29 +56,41 @@ const WorldQuantSection = () => {
 
   return (
     <section className="wqf-section-outer" ref={sectionRef}>
-      <motion.div className="wqf-section-inner" style={{ clipPath }}>
+      <div className="wqf-section-inner">
         <div className="wqf-container">
 
           {/* Intro */}
           <div className="wqf-intro-top">
-            <div className="wqf-intro-left">
-              <p className="wqf-eyebrow">Our Ethos</p>
+            <motion.div 
+              className="wqf-intro-left"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <p className="wqf-eyebrow">Our Approach</p>
               <h2 className="wqf-heading">
-                Vision Matters.<br />Velocity Wins.
+                Build Fast.<br />Ship Smart.
               </h2>
-            </div>
-            <div className="wqf-intro-right">
+            </motion.div>
+            <motion.div 
+              className="wqf-intro-right"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
               <div className="wqf-desc-container">
                 <p className="wqf-description">
-                  Our comprehensive platform shifts the odds. With infrastructure that works.
-                  With operations driven forward, not under. This isn't an accelerator.
-                  It's complete company building, at the speed of potential.
+                  We believe great software is the difference between a business that survives
+                  and one that dominates. Whether it's a Shopify store or an AI product,
+                  we build with intention, speed, and a relentless focus on real outcomes.
                 </p>
                 <button className="wqf-join-btn">
-                  <span className="wqf-join-btn-inner">Join Us</span>
+                  <span className="wqf-join-btn-inner">Our Work</span>
                 </button>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Cards */}
@@ -126,7 +134,7 @@ const WorldQuantSection = () => {
           </div>
 
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

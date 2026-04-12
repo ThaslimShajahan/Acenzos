@@ -3,17 +3,17 @@ import { motion, useInView } from 'framer-motion';
 import './StatsBar.css';
 
 const stats = [
-  { value: '150+', label: 'Projects Delivered' },
-  { value: '8+',   label: 'Years of Excellence' },
-  { value: '50+',  label: 'Happy Clients' },
-  { value: '98%',  label: 'Client Satisfaction' },
+  { value: '60+',  label: 'Projects Delivered' },
+  { value: '3+',   label: 'Years in Business' },
+  { value: '30+',  label: 'Happy Clients' },
+  { value: '100%', label: 'Client Satisfaction' },
 ];
 
 const about = [
-  'Product Strategy & UX Research',
-  'Design Systems & Brand Identity',
-  'Full-Stack Web & Mobile Development',
-  'AI Integration & Automation',
+  'Shopify Store Development & Customization',
+  'Custom Web & Mobile Application Development',
+  'AI Products & Automation (Redber AI)',
+  'Brand Identity & UI/UX Design',
 ];
 
 export const StatsBar = () => {
@@ -54,8 +54,8 @@ export const AboutSection = () => {
           >
             <p className="eyebrow">Who We Are</p>
             <h2 className="h-xl about-heading">
-              Building the future of digital,{' '}
-              <span className="text-muted">one product at a time.</span>
+              Building software that{' '}
+              <span className="text-muted">actually ships.</span>
             </h2>
           </motion.div>
           <motion.div
@@ -65,9 +65,9 @@ export const AboutSection = () => {
             transition={{ duration: 0.75, delay: 0.1, ease: [0.16,1,0.3,1] }}
           >
             <p className="about-desc">
-              Acenzos is a full-service digital engineering studio. We partner with
-              ambitious companies to design, build, and launch products that people love —
-              from early-stage startups to global enterprises.
+              Acenzos is a product-first technology company based in Kerala, India. We build
+              Shopify-powered e-commerce experiences for global brands and develop in-house
+              software products — including Redber, our AI communication platform.
             </p>
             <div className="about-list">
               {about.map((item, i) => (
