@@ -1,0 +1,119 @@
+name: CI / Deploy
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # ── 1. Build & Lint ─────────────────────────────────────────────────────────
+  # Runs on every push and on PRs targeting main.
+  # Acts as a quality gate — deploy jobs depend on this passing.
+  build:
+    name: Build & Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      # Upload dist so deploy jobs can reuse it without rebuilding
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  # ── 2. Deploy → Staging (dev branch only) ───────────────────────────────────
+  # Deploys a draft URL on every push to dev.
+  # The draft URL is printed in the Actions log — share it for review.
+  #
+  # Required secrets:
+  #   NETLIFY_AUTH_TOKEN  →  Netlify user settings → Personal access tokens
+  #   NETLIFY_SITE_ID     →  Netlify site settings → General → Site details → Site ID
+  deploy-staging:
+    name: Deploy → Staging
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.NETLIFY_URL }}
+
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Deploy draft to Netlify
+        id: deploy
+        run: |
+          DEPLOY_OUTPUT=$(npx --yes netlify-cli deploy \
+            --dir=dist \
+            --message="Staging — ${GITHUB_SHA::7}" \
+            --json 2>/dev/null)
+          NETLIFY_URL=$(echo "$DEPLOY_OUTPUT" | python3 -c "import sys,json; print(json.load(sys.stdin)['deploy_url'])")
+          echo "NETLIFY_URL=$NETLIFY_URL" >> "$GITHUB_OUTPUT"
+          echo "### Staging Preview" >> "$GITHUB_STEP_SUMMARY"
+          echo "$NETLIFY_URL" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  # ── 3. Deploy → Production (main branch only) ───────────────────────────────
+  # Deploys to the live site on every push to main.
+  # Requires manual approval if you add a "production" environment protection rule
+  # in GitHub → Settings → Environments → production → Required reviewers.
+  deploy-production:
+    name: Deploy → Production
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.NETLIFY_URL }}
+
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Deploy to Netlify production
+        id: deploy
+        run: |
+          DEPLOY_OUTPUT=$(npx --yes netlify-cli deploy \
+            --dir=dist \
+            --prod \
+            --message="Production — ${GITHUB_SHA::7}" \
+            --json 2>/dev/null)
+          NETLIFY_URL=$(echo "$DEPLOY_OUTPUT" | python3 -c "import sys,json; print(json.load(sys.stdin)['deploy_url'])")
+          echo "NETLIFY_URL=$NETLIFY_URL" >> "$GITHUB_OUTPUT"
+          echo "### Production Deploy" >> "$GITHUB_STEP_SUMMARY"
+          echo "$NETLIFY_URL" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
