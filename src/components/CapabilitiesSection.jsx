@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { droneStore } from '../droneStore';
 import './CapabilitiesSection.css';
 
@@ -41,7 +42,7 @@ const CapabilitiesSection = () => {
     return () => obs.disconnect();
   }, []);
 
-  droneStore.capActiveIndex = activeIdx;
+  useEffect(() => { droneStore.capActiveIndex = activeIdx; });
 
   return (
     <section className="cap-section" id="capabilities" ref={sectionRef}>

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import './Hero.css';
 
 /* ═══════════════════════════════════════════════════════════

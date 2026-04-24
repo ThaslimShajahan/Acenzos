@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import './CTASection.css';
 
 const ease = [0.16, 1, 0.3, 1];
