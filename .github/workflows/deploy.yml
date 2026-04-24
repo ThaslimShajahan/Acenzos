@@ -1,0 +1,88 @@
+name: CI / Deploy
+
+# push main  → build + lint + deploy to production
+# PR → main  → build + lint only (quality gate)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # ── 1. Build & Lint ──────────────────────────────────────────────────────────
+  build:
+    name: Build & Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  # ── 2. Deploy → Production (main branch only) ────────────────────────────────
+  #
+  # GitHub Secrets required (Settings → Secrets → Actions):
+  #   SSH_PRIVATE_KEY   — private key added to server's authorized_keys
+  #   PROD_SSH_HOST     — server IP or hostname
+  #   PROD_SSH_PORT     — 22 (VPS) or 2222 (cPanel)
+  #   PROD_SSH_USER     — SSH user (root for VPS, acenzos for cPanel)
+  #   PROD_DEPLOY_PATH  — e.g. /var/www/acenzos.com/public_html
+  deploy-production:
+    name: Deploy → Production
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    environment:
+      name: production
+
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Trust server host key
+        run: |
+          ssh-keyscan -p ${{ secrets.PROD_SSH_PORT }} \
+            ${{ secrets.PROD_SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Sync dist → production server
+        run: |
+          rsync -avzr --delete \
+            -e "ssh -p ${{ secrets.PROD_SSH_PORT }}" \
+            dist/ \
+            ${{ secrets.PROD_SSH_USER }}@${{ secrets.PROD_SSH_HOST }}:${{ secrets.PROD_DEPLOY_PATH }}
+
+      - name: Done
+        run: echo "Deployed ${{ github.sha }} to production"

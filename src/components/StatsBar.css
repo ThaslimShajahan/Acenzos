@@ -145,9 +145,13 @@
 }
 
 @media (max-width: 860px) {
+  .about-section { padding: 80px 0; }
   .about-body { grid-template-columns: 1fr; gap: 48px; }
   .about-title { font-size: clamp(3rem, 10vw, 5rem); }
+  .about-hd { padding-bottom: 40px; margin-bottom: 48px; }
 }
 @media (max-width: 540px) {
+  .about-section { padding: 60px 0; }
   .about-cta { width: 100%; justify-content: center; }
+  .about-desc { font-size: 0.88rem; }
 }

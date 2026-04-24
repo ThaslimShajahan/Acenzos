@@ -28,11 +28,15 @@ function startSphereCanvas(canvas, progRef) {
   const ctx = canvas.getContext('2d');
   let W, H, R, CX, CY, dpr;
   const setup = () => {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     W = canvas.offsetWidth; H = canvas.offsetHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
-    R = Math.min(W, H) * 0.31; CX = W * 0.5; CY = H * 0.50;
+    R = Math.min(W, H) * 0.31;
+    CX = W * 0.5;
+    // On mobile the text lives at the bottom ~40% of the viewport.
+    // Shift the sphere center into the upper third so they don't overlap.
+    CY = W < 768 ? H * 0.36 : H * 0.50;
   };
   setup();
   const ro = new ResizeObserver(setup); ro.observe(canvas);

@@ -32,6 +32,12 @@ function App() {
 
   useEffect(() => {
     if (!loading) {
+      // Disable Lenis on touch/mobile — native scroll is smoother on mobile OS
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      if (isTouchDevice) {
+        window.lenis = null;
+        return;
+      }
       const lenis = new Lenis({ lerp: 0.085, smoothTouch: false });
       window.lenis = lenis;
       function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }

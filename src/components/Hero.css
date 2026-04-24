@@ -349,8 +349,25 @@
   .hw-serif { font-size: clamp(2.8rem, 10vw, 9rem); }
 }
 @media (max-width: 860px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 36px; align-items: flex-start; }
+  /* Switch from grid to flex so children are guaranteed full-width */
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: stretch;
+  }
+  .hero-left, .hero-right { width: 100%; }
   .hero { height: 220vh; }
+  .hero-sticky { padding-bottom: 48px; }
+  /* Stack + stretch buttons to fill the column */
+  .hero-actions { display: flex; flex-direction: column; gap: 10px; }
+  .hero-btn {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+    white-space: normal;
+  }
 }
 @media (max-width: 540px) {
   .hw-giant, .hw-outline { font-size: clamp(3.5rem, 17vw, 7rem); }
@@ -359,7 +376,11 @@
     font-size: clamp(3.5rem, 17vw, 7rem);
   }
   .hw-serif { font-size: clamp(2.4rem, 13vw, 5rem); }
-  .hero-actions { flex-direction: column; }
-  .hero-btn { width: 100%; justify-content: center; }
   .hero { height: 200vh; }
+  .hero-badge { margin-bottom: 24px; }
+  /* Fix tagline from absolute → static flow so it can't bleed horizontally */
+  .hero-tagline { position: static; max-width: 100%; font-size: 0.82rem; }
+  .hero-tagline-wrap { min-height: unset; margin-top: 16px; }
+  .hero-chips { gap: 8px; }
+  .hero-chip { padding: 12px 14px; }
 }

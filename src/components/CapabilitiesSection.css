@@ -157,7 +157,13 @@
   .cap-left { position: static; }
   .cap-right { padding-bottom: 0; }
 }
+@media (max-width: 768px) {
+  .cap-section { padding: 80px 0; }
+}
 @media (max-width: 600px) {
   .cap-row-title { font-size: 1.1rem; }
   .cap-row-inner { padding: 20px 8px; }
+}
+@media (max-width: 480px) {
+  .cap-section { padding: 60px 0; }
 }
