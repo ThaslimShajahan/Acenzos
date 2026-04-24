@@ -1,15 +1,11 @@
 name: CI / Deploy
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  Triggers
-#    push dev   → build + lint + deploy to STAGING server
-#    push main  → build + lint + deploy to PRODUCTION server
-#    PR → main  → build + lint only (quality gate, no deploy)
-# ─────────────────────────────────────────────────────────────────────────────
+# push main  → build + lint + deploy to production
+# PR → main  → build + lint only (quality gate)
 
 on:
   push:
-    branches: [dev, main]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -18,7 +14,6 @@ env:
 
 jobs:
   # ── 1. Build & Lint ──────────────────────────────────────────────────────────
-  # Always runs. Blocks deploy jobs if lint or build fails.
   build:
     name: Build & Lint
     runs-on: ubuntu-latest
@@ -42,7 +37,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Share the compiled dist/ with deploy jobs — avoids rebuilding
       - name: Upload dist artifact
         uses: actions/upload-artifact@v4
         with:
@@ -50,70 +44,19 @@ jobs:
           path: dist/
           retention-days: 1
 
-  # ── 2. Deploy → Staging  (dev branch pushes only) ───────────────────────────
+  # ── 2. Deploy → Production (main branch only) ────────────────────────────────
   #
-  # GitHub Secrets required:
-  #   SSH_PRIVATE_KEY       Private key whose public key is in ~/.ssh/authorized_keys on the server
-  #   STAGING_SSH_HOST      Hostname or IP  (e.g. staging.acenzos.com or 123.45.67.89)
-  #   STAGING_SSH_PORT      22 for VPS · 2222 for cPanel SSH
-  #   STAGING_SSH_USER      SSH login user  (VPS: root/deploy · cPanel: cpanel-username)
-  #   STAGING_DEPLOY_PATH   Absolute path on server
-  #                         cPanel → /home/USERNAME/staging.acenzos.com/public_html
-  #                         VPS    → /var/www/staging.acenzos.com/public_html
-  deploy-staging:
-    name: Deploy → Staging
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
-    environment:
-      name: staging
-
-    steps:
-      - name: Download dist artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Trust server host key
-        run: |
-          ssh-keyscan -p ${{ secrets.STAGING_SSH_PORT }} \
-            ${{ secrets.STAGING_SSH_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Sync dist → staging server
-        run: |
-          rsync -avzr --delete \
-            -e "ssh -p ${{ secrets.STAGING_SSH_PORT }}" \
-            dist/ \
-            ${{ secrets.STAGING_SSH_USER }}@${{ secrets.STAGING_SSH_HOST }}:${{ secrets.STAGING_DEPLOY_PATH }}
-
-      - name: Done
-        run: echo "Staging deploy complete — ${{ github.sha }}"
-
-  # ── 3. Deploy → Production  (main branch pushes only) ───────────────────────
-  #
-  # GitHub Secrets required:
-  #   SSH_PRIVATE_KEY       Same key as above (or a separate prod-only key)
-  #   PROD_SSH_HOST         Hostname or IP  (e.g. acenzos.com or 98.76.54.32)
-  #   PROD_SSH_PORT         22 for VPS · 2222 for cPanel SSH
-  #   PROD_SSH_USER         SSH login user
-  #   PROD_DEPLOY_PATH      Absolute path on server
-  #                         cPanel → /home/USERNAME/acenzos.com/public_html
-  #                         VPS    → /var/www/acenzos.com/public_html
-  #
-  # Tip: add yourself as a Required Reviewer in
-  #   GitHub → Settings → Environments → production → Required reviewers
-  # to get a manual approval step before every production deploy.
+  # GitHub Secrets required (Settings → Secrets → Actions):
+  #   SSH_PRIVATE_KEY   — private key added to server's authorized_keys
+  #   PROD_SSH_HOST     — server IP or hostname
+  #   PROD_SSH_PORT     — 22 (VPS) or 2222 (cPanel)
+  #   PROD_SSH_USER     — SSH user (root for VPS, acenzos for cPanel)
+  #   PROD_DEPLOY_PATH  — e.g. /var/www/acenzos.com/public_html
   deploy-production:
     name: Deploy → Production
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'push'
     environment:
       name: production
 
@@ -142,4 +85,4 @@ jobs:
             ${{ secrets.PROD_SSH_USER }}@${{ secrets.PROD_SSH_HOST }}:${{ secrets.PROD_DEPLOY_PATH }}
 
       - name: Done
-        run: echo "Production deploy complete — ${{ github.sha }}"
+        run: echo "Deployed ${{ github.sha }} to production"
