@@ -327,9 +327,13 @@
 
 /* ── Responsive ── */
 @media (max-width: 860px) {
+  .ws-section { padding: 100px 0; }
   .ws-grid { grid-template-columns: 1fr; gap: 52px; }
   .ws-card:hover .ws-card-img-box { border-radius: 16px 16px 16px 140px; }
+  .ws-hd { margin-bottom: 48px; padding-bottom: 40px; }
 }
 @media (max-width: 540px) {
+  .ws-section { padding: 72px 0; }
   .ws-card:hover .ws-card-img-box { border-radius: 16px 16px 16px 120px; }
+  .ws-card-desc { font-size: 0.80rem; }
 }

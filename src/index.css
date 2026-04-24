@@ -110,6 +110,9 @@ html {
   scroll-behavior: unset !important;
   font-size: 16px;
   cursor: none;
+  /* Prevent horizontal scroll from absolutely-positioned decorative elements
+     (ghost numbers, cycle rows) without creating a new stacking/scroll context */
+  overflow-x: clip;
 }
 body {
   font-family:             var(--font-body);

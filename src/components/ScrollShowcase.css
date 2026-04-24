@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
   /* Font anti-aliasing fixes */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -174,8 +174,43 @@
 @media (max-width: 860px) {
   .ss-word { font-size: clamp(4rem, 18vw, 10rem); }
   .ss-meta { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .ss-global-bg {
+    width: 38vw;
+    right: 4vw;
+    min-width: 180px;
+  }
+  .ss-global-bg--butterfly {
+    left: auto;
+    right: 4vw;
+    width: 30vw;
+    min-width: 140px;
+  }
 }
 @media (max-width: 540px) {
-  .ss-word { font-size: clamp(3.2rem, 20vw, 6rem); }
-  .ss-section { height: 350vh; }
+  .ss-section { height: 320vh; }
+  .ss-word { font-size: clamp(3rem, 22vw, 6rem); }
+  .ss-word-row { margin-bottom: 24px; }
+  .ss-meta { gap: 14px; max-width: 100%; }
+  .ss-desc { font-size: 0.82rem; }
+  /* Place GIFs at top-right of the text block (text is vertically centred ≈38% down) */
+  .ss-global-bg {
+    top: 32%;
+    bottom: auto;
+    transform: none;
+    right: 0;
+    left: auto;
+    width: 42vw;
+    min-width: 100px;
+    max-width: 165px;
+    opacity: 0.8;
+  }
+  .ss-global-bg--butterfly {
+    top: 32%;
+    bottom: auto;
+    left: auto;
+    right: 0;
+    width: 36vw;
+    min-width: 90px;
+    max-width: 145px;
+  }
 }

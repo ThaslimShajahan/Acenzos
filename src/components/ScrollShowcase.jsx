@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent, useMotionValue } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useTransform, useMotionValue } from 'framer-motion';
 import './ScrollShowcase.css';
 
 /* ─── Sphere canvas ─────────────────────────────────── */
@@ -15,7 +15,7 @@ function startMiniSphere(canvas) {
   const ctx = canvas.getContext('2d');
   let W, H, R, CX, CY, dpr;
   const setup = () => {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     W = canvas.offsetWidth; H = canvas.offsetHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
@@ -98,7 +98,6 @@ const SLIDE_MAPPINGS = [
   {
     x:       [0,    0.20, 0.28, 1   ],
     opacity: [1,    1,    0,    0   ],
-    blur:    [0,    0,    20,   20  ],
     scale:   [1,    1,    1.1,  1.1 ],
     y:       [0,    0,    -80,  -80 ],
   },
@@ -106,7 +105,6 @@ const SLIDE_MAPPINGS = [
   {
     x:       [0,    0.32, 0.42, 0.58, 0.66, 1   ],
     opacity: [0,    0,    1,    1,    0,    0   ],
-    blur:    [20,   20,   0,    0,    20,   20  ],
     scale:   [0.9,  0.9,  1,    1,    1.1,  1.1 ],
     y:       [80,   80,   0,    0,    -80,  -80 ],
   },
@@ -114,7 +112,6 @@ const SLIDE_MAPPINGS = [
   {
     x:       [0,    0.70, 0.80, 1   ],
     opacity: [0,    0,    1,    1   ],
-    blur:    [20,   20,   0,    0   ],
     scale:   [0.9,  0.9,  1,    1   ],
     y:       [80,   80,   0,    0   ],
   },
@@ -123,10 +120,8 @@ const SLIDE_MAPPINGS = [
 /* ─── Unified Slide: Background + Text in one container ── */
 function Slide({ slide, mapping, scrollYProgress }) {
   const op     = useTransform(scrollYProgress, mapping.x, mapping.opacity);
-  const blurV  = useTransform(scrollYProgress, mapping.x, mapping.blur);
   const scaleV = useTransform(scrollYProgress, mapping.x, mapping.scale);
   const yV     = useTransform(scrollYProgress, mapping.x, mapping.y);
-  const filter = useTransform(blurV, v => `blur(${v}px)`);
 
   // Safely assign active slides a higher z-index and pointer-events
   const zIndex        = useTransform(op, v => (v > 0.05 ? 20 : 1));
@@ -160,7 +155,6 @@ function Slide({ slide, mapping, scrollYProgress }) {
       {slide.img && (
         <motion.div
           className={`ss-global-bg${slide.bgCls ? ` ${slide.bgCls}` : ''}`}
-          style={{ filter }}
         >
           <motion.img
             src={slide.img}
@@ -171,9 +165,9 @@ function Slide({ slide, mapping, scrollYProgress }) {
       )}
 
       {/* Text Content Layer */}
-      <motion.div 
+      <motion.div
         className="ss-slide-inner wrap"
-        style={{ scale: scaleV, y: yV, filter }}
+        style={{ scale: scaleV, y: yV }}
       >
         <div className="ss-word-row">
           <span className={`ss-word ${slide.wordCls}`}>{wordContent}</span>
