@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import './StackedCards.css';
 
 import img1 from '../assets/imgs/3175466.jpg';

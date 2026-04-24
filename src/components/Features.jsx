@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Sparkles, Activity, Layers, Shield } from 'lucide-react';
 import './Features.css';
 
