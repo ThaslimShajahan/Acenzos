@@ -57,8 +57,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
-    environment:
-      name: production
 
     steps:
       - name: Download dist artifact
