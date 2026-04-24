@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Lenis from 'lenis';
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Preloader from './components/Preloader';

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 const E = [0.76, 0, 0.24, 1]; // Sharp deceleration — Utility Agency signature
 
