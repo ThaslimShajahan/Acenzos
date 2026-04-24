@@ -1,88 +1,101 @@
-import React, { useState } from 'react';
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import logoWhite from '../assets/logo/logo-acenzos-white.png';
 import MobileMenu from './MobileMenu';
 import './Navbar.css';
 
 const NAV_LINKS = [
-  { label: 'Work', path: '/work' },
+  { label: 'Work',      path: '/work' },
   { label: 'Expertise', path: '/expertise' },
-  { label: 'Studio', path: '/studio' },
-  { label: 'Contact', path: '/contact' },
+  { label: 'Studio',    path: '/studio' },
 ];
 
 const Navbar = () => {
   const { scrollY } = useScroll();
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isLight, setIsLight]       = useState(false);
   const location = useLocation();
-  const isLightPage = ['/expertise', '/studio'].includes(location.pathname);
 
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    setScrolled(latest > 50);
+  useMotionValueEvent(scrollY, 'change', (v) => {
+    setScrolled(prev => (v > 100 ? true : v < 50 ? false : prev));
   });
+
+  // Watch for light-background sections intersecting the navbar zone
+  useEffect(() => {
+    const NAV_H = 80; // approx navbar height + buffer
+    const observe = () => {
+      const targets = document.querySelectorAll('[data-nav-light]');
+      if (!targets.length) return;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          // If any light section is intersecting the top strip, invert
+          const anyLight = entries.some(e => e.isIntersecting);
+          setIsLight(anyLight);
+        },
+        {
+          rootMargin: `-0px 0px -${window.innerHeight - NAV_H}px 0px`,
+          threshold: 0,
+        }
+      );
+      targets.forEach(el => observer.observe(el));
+      return () => observer.disconnect();
+    };
+    // Small delay so DOM is ready after route change
+    const t = setTimeout(observe, 100);
+    return () => clearTimeout(t);
+  }, [location.pathname]);
 
   return (
     <>
-      <header className="navbar-wrapper">
-        <div className={`navbar-pill ${scrolled ? 'is-scrolled' : ''} ${isLightPage && !scrolled ? 'is-light-theme' : ''}`}>
+      <div className={`nav-pill${scrolled ? ' is-scrolled' : ''}${isLight ? ' is-light' : ''}`}>
 
-          {/* BRAND */}
-          <Link to="/" className="navbar__brand" onClick={() => setMobileOpen(false)}>
-            <div className="navbar__logo-wrapper">
-              <img src={logoWhite} alt="Acenzos" className="navbar__logo" />
-            </div>
-            <AnimatePresence>
-              {!scrolled && (
-                <motion.span
-                  className="navbar__text"
-                  initial={{ opacity: 0, width: 0, marginLeft: 0 }}
-                  animate={{ opacity: 1, width: 'auto', marginLeft: 12 }}
-                  exit={{ opacity: 0, width: 0, marginLeft: 0 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
-                >
-                  Acenzos
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </Link>
+        {/* Brand — layoutId matches preloader logo for fly-in animation */}
+        <Link to="/" className="nav-brand" onClick={() => setMobileOpen(false)}>
+          <motion.img
+            layoutId="brand-logo"
+            src="/logo/logo.svg"
+            alt="Acenzos"
+            className="nav-logo"
+            transition={{ duration: 1.4, ease: [0.77, 0, 0.175, 1] }}
+          />
+          <span className={`nav-name${scrolled ? ' is-hidden' : ''}`}>Acenzos</span>
+        </Link>
 
-          {/* DESKTOP NAVIGATION */}
-          <div className="navbar__group navbar__desktop-only">
-            <nav className="navbar__links">
-              {NAV_LINKS.filter(l => l.label !== 'Contact').map(link => (
-                <Link 
-                  key={link.label} 
-                  to={link.path} 
-                  className={`navbar__link ${location.pathname === link.path ? 'is-active' : ''}`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-            <Link to="/contact" className="navbar__cta">Let's Talk</Link>
-          </div>
-
-          {/* MOBILE HAMBURGER */}
-          <button
-            className={`hamburger ${mobileOpen ? 'is-open' : ''}`}
-            onClick={() => setMobileOpen(v => !v)}
-            aria-label="Toggle menu"
-          >
-            <span className="hamburger__line" />
-            <span className="hamburger__line" />
-            <span className="hamburger__line" />
-          </button>
-
+        {/* Links + CTA — collapses on scroll */}
+        <div className={`nav-center nav-desktop${scrolled ? ' is-hidden' : ''}`}>
+          <div className="nav-sep" />
+          <nav className="nav-links">
+            {NAV_LINKS.map(link => (
+              <Link
+                key={link.label}
+                to={link.path}
+                className={`nav-link${location.pathname === link.path ? ' is-active' : ''}`}
+              >
+                <span className="nav-dot" />
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          <Link to="/contact" className="nav-cta">Let's Talk</Link>
         </div>
-      </header>
 
-      {/* MOBILE SEPARATE DRAWER */}
+        {/* Hamburger: always on mobile, appears on scroll for desktop */}
+        <button
+          className={`nav-burger${mobileOpen ? ' is-open' : ''}${scrolled ? ' nav-burger--show' : ''}`}
+          onClick={() => setMobileOpen(v => !v)}
+          aria-label="Toggle menu"
+        >
+          <span className="nav-burger__line" />
+          <span className="nav-burger__line" />
+        </button>
+
+      </div>
+
       <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
     </>
   );
 };
 
 export default Navbar;
+

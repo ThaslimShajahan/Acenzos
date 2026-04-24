@@ -1,0 +1,41 @@
+.breadcrumbs {
+  padding: 24px 0 0 0;
+  margin-bottom: -20px;
+  position: relative;
+  z-index: 10;
+}
+
+.breadcrumbs-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.bc-link {
+  color: var(--text-3);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.bc-link:hover {
+  color: var(--text);
+}
+
+.bc-current {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.bc-sep {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* Light mode support for pages that use it */
+.page-light .bc-link { color: rgba(0,0,0,0.5); }
+.page-light .bc-link:hover { color: #000; }
+.page-light .bc-current { color: #000; }
+.page-light .bc-sep { color: rgba(0,0,0,0.15); }

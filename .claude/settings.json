@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Read(//c/Users/THASLIM/.claude/projects/c--Work-Acenzos/memory/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "WebFetch(domain:izum.study)",
+      "Bash(curl -s \"https://izum.study/en\")",
+      "Bash(curl -s \"https://izum.study/g/s3/mosaic/css/ms_site_default.css\")",
+      "Bash(curl -s \"https://izum.study/g/s3/mosaic/css/constructor/redesign/tt_default_styles.css\")",
+      "Bash(curl -s \"https://izum.study/t/v3321/images/mosaic/designs/shared-design-styles.css\")",
+      "Bash(grep -i \"nav\\\\|header\\\\|color\\\\|rgb\\\\|background\\\\|#[0-9a-f]\\\\{3,6\\\\}\")",
+      "Bash(grep -o \"rgba\\\\|#[0-9a-f]\\\\{3,6\\\\}\")",
+      "Bash(curl -s \"https://izum.study/t/v3319/images/mosaic/symbols/symbol-i02ktm1wu_styles.css\")",
+      "Bash(npx vite *)",
+      "WebFetch(domain:utility.agency)",
+      "WebFetch(domain:webandcrafts.com)",
+      "Bash(curl -s http://localhost:5174)",
+      "WebSearch"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\THASLIM\\.claude\\projects\\c--Work-Acenzos\\memory"
+    ]
+  }
+}

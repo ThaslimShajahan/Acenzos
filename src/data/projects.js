@@ -1,59 +1,69 @@
+import imgRedber   from '../imgs/redber-1.png';
+import imgPlatform from '../imgs/c-arc.png';
+
 export const PROJECTS_DATA = [
   {
     id: 1,
     slug: 'redber',
+    number: '01',
     title: 'Redber AI',
     category: 'AI Product',
     year: '2024',
-    color: '#4f46e5',
+    color: '#ff6b6b',
+    gradient: 'linear-gradient(135deg, #ff6b6b 0%, #f06595 100%)',
+    img: imgRedber,
+    detailImg: imgRedber,
     tagline: 'The AI Receptionist That Never Sleeps.',
-    overview: 'Redber AI is an AI-powered communication platform built by Acenzos. It handles customer inquiries 24/7, captures leads, books appointments, and provides instant intelligent support — trained on your business knowledge.',
-    challenge: 'Businesses lose over 60% of potential leads after office hours. Traditional chatbots are rigid, frustrating, and fail to convert high-intent visitors into customers.',
-    solution: 'We built a low-latency LLM orchestration layer that lets Redber respond in under 3 seconds. With persistent memory and a custom Knowledge Base, it understands your business better than a human trainee — and never takes a day off.',
+    services: ['AI Architecture', 'Product Design', 'Full-Stack Development', 'Deployment & Infra'],
+    timeline: '4 months',
+    deliverables: ['Production AI platform', 'Custom Knowledge Base UI', 'Embeddable widget', 'Admin dashboard'],
+    overview: `Redber AI is an intelligent communication platform built entirely in-house at Acenzos. It handles customer inquiries around the clock — capturing leads, booking appointments, and providing instant support trained on your specific business knowledge. Unlike rigid chatbots of the past, Redber understands context, remembers conversations, and responds with the nuance your customers deserve.`,
+    challenge: `Modern businesses lose over 60% of potential leads outside office hours. Existing solutions were either rigid, scripted chatbots that frustrated visitors, or expensive enterprise platforms that required months of setup. Founders needed something that just worked — intelligent, fast, and trainable in minutes rather than months.`,
+    solution: `We architected a low-latency LLM orchestration layer that enables Redber to respond in under 3 seconds on average. A custom vector-based Knowledge Base allows any business to train Redber on their documentation, FAQs, pricing, and tone. Persistent conversation memory means customers never repeat themselves. The result is a platform that feels genuinely intelligent — not just automated.`,
+    processSteps: [
+      { phase: '01', title: 'Discovery', desc: 'Mapped the customer journey for 12 SMB personas. Identified the key drop-off points and the moments where automation adds the most value.' },
+      { phase: '02', title: 'Architecture', desc: 'Designed the LLM orchestration layer, Knowledge Base schema, and real-time streaming pipeline. Chose PostgreSQL + pgvector for scalable semantic search.' },
+      { phase: '03', title: 'Build', desc: 'Six-week sprint delivering the core chat engine, admin portal, and embeddable widget. Daily dogfooding across the Acenzos team uncovered and fixed edge cases fast.' },
+      { phase: '04', title: 'Launch', desc: 'Soft-launched to 5 beta clients. Iterated on Knowledge Base UX, response tone controls, and escalation flows based on real conversation data.' },
+    ],
     results: [
       { label: 'Uptime', value: '100%' },
-      { label: 'Response Time', value: '< 3s' },
-      { label: 'Lead Conversion', value: '+40%' }
+      { label: 'Avg Response', value: '< 3s' },
+      { label: 'Lead Conversion', value: '+40%' },
     ],
-    techStack: ['React', 'Node.js', 'PostgreSQL', 'OpenAI API', 'Framer Motion'],
-    nextSlug: 'shopify-storefront'
+    techStack: ['React', 'Node.js', 'PostgreSQL', 'pgvector', 'OpenAI API', 'Framer Motion', 'Vercel'],
+    nextSlug: 'architecture-dashboard',
   },
   {
     id: 2,
-    slug: 'shopify-storefront',
-    title: 'Custom Shopify Store',
-    category: 'E-Commerce',
-    year: '2024',
-    color: '#96bf48',
-    tagline: 'Conversion-First Shopify Experiences.',
-    overview: 'We design and develop high-converting Shopify stores for brands that want more than a template. Custom themes built with Liquid, tailored to each brand\'s identity and customer journey.',
-    challenge: 'Off-the-shelf Shopify themes limit brand potential, have poor LCP scores, and can\'t handle the unique business logic that sets growing brands apart.',
-    solution: 'We develop fully custom Shopify themes from scratch using Liquid, React components, and Shopify Metafields — giving brands complete design freedom with full Shopify platform compatibility.',
-    results: [
-      { label: 'Page Speed', value: '95+' },
-      { label: 'Conversion', value: '+35%' },
-      { label: 'Bounce Rate', value: '-28%' }
-    ],
-    techStack: ['Shopify', 'Liquid', 'Alpine.js', 'Tailwind CSS', 'Shopify APIs'],
-    nextSlug: 'acenzos-platform'
-  },
-  {
-    id: 3,
-    slug: 'acenzos-platform',
-    title: 'Acenzos Platform',
-    category: 'SaaS Development',
+    slug: 'architecture-dashboard',
+    number: '02',
+    title: 'Architecture Dashboard',
+    category: 'SaaS / Internal',
     year: '2025',
-    color: '#0ea5e9',
-    tagline: 'Our In-House SaaS Infrastructure.',
-    overview: 'The internal platform powering all of Acenzos operations — from client project management to product delivery pipelines. Built to be scalable, extensible, and beautifully simple.',
-    challenge: 'Managing multiple concurrent client projects, internal deployments, and product iterations across team members required a centralized, purpose-built tool.',
-    solution: 'We built a modular SaaS backbone with role-based access, real-time collaboration features, and automated delivery pipelines that cut our internal overhead by half.',
-    results: [
-      { label: 'Efficiency', value: '+50%' },
-      { label: 'Deploy Time', value: '-60%' },
-      { label: 'Team Size', value: 'Lean 5' }
+    color: '#7048e8',
+    gradient: 'linear-gradient(135deg, #7048e8 0%, #f783ac 100%)',
+    img: imgPlatform,
+    detailImg: imgPlatform,
+    tagline: 'Precision Operations & Scalable Infrastructure.',
+    services: ['SaaS Architecture', 'Full-Stack Development', 'Internal Tooling', 'DevOps'],
+    timeline: '3 months',
+    deliverables: ['Project management system', 'Delivery pipeline automation', 'Client portal', 'Internal analytics'],
+    overview: `The Architecture Dashboard is the mission control for our internal operations. It manages the entire lifecycle of software delivery — from initial architecture mapping to automated deployment monitoring. Designed for high-density information display and rapid task execution, it ensures every project we ship meets our internal standard for performance and craft.`,
+    challenge: `Scaling a high-end digital studio requires more than just good engineers; it requires a single source of truth for complex work streams. Fragmented tools led to information silos and manual overhead in project tracking and reporting.`,
+    solution: `We engineered a real-time, event-driven dashboard that aggregates data from our entire stack. With deep integrations into GitHub, Vercel, and internal performance monitors, it provides a unified view of the architecture’s health and the project’s progress. The interface is optimized for developers and stakeholders alike, reducing friction and maximizing velocity.`,
+    processSteps: [
+      { phase: '01', title: 'Logic Mapping', desc: 'Deconstructed our internal delivery lifecycle into discrete, measurable states.' },
+      { phase: '02', title: 'System Design', desc: 'Built a robust API layer capable of handling high-frequency updates from external webhooks.' },
+      { phase: '03', title: 'Interface Build', desc: 'Crafted a low-latency UI focusing on data density without sacrificing clarity or aesthetics.' },
+      { phase: '04', title: 'Internal Alpha', desc: 'Deployed across our team, gathering real-world performance data to refine the UX.' },
     ],
-    techStack: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'Vercel'],
-    nextSlug: 'redber'
-  }
+    results: [
+      { label: 'Latency', value: '120ms' },
+      { label: 'Deploy Time', value: '-60%' },
+      { label: 'Visibility', value: '100%' },
+    ],
+    techStack: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'WebSocket', 'GitHub API', 'Vercel'],
+    nextSlug: 'redber',
+  },
 ];

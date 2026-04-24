@@ -2,36 +2,37 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import Hero from '../components/Hero';
-import { StatsBar, AboutSection } from '../components/StatsBar';
+import { AboutSection } from '../components/StatsBar';
 import WorkSection from '../components/WorkSection';
+import MarqueeSection from '../components/MarqueeSection';
+import ScrollShowcase from '../components/ScrollShowcase';
 import CapabilitiesSection from '../components/CapabilitiesSection';
-import ClientsSection from '../components/ClientsSection';
 import WorldQuantSection from '../components/WorldQuantSection';
-import StackedCards from '../components/StackedCards';
 import ImmersiveScaleSection from '../components/ImmersiveScaleSection';
 import CTASection from '../components/CTASection';
-import TechSwarm from '../components/TechSwarm';
 
 const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Acenzos — Shopify Development & AI Products</title>
-        <meta name="description" content="Acenzos builds Shopify storefronts, custom web apps, and AI-powered products like Redber. Based in Kerala, India." />
+        <title>Acenzos — Commerce Architecture & Applied AI</title>
+        <meta name="description" content="Acenzos builds AI products, Shopify storefronts, and custom web applications. Fast, clean, and built to scale." />
+        <link rel="canonical" href="https://acenzos.com/" />
+        <meta property="og:title"       content="Acenzos — Commerce Architecture & Applied AI" />
+        <meta property="og:description" content="We build AI products, Shopify storefronts, and custom web platforms. Fast, clean, and built to last." />
+        <meta property="og:url"         content="https://acenzos.com/" />
+        <meta name="twitter:title"       content="Acenzos — Commerce Architecture & Applied AI" />
+        <meta name="twitter:description" content="We build AI products, Shopify storefronts, and custom web platforms." />
       </Helmet>
-      
-      {/* 3D Drone only lives on the Home page */}
-      <TechSwarm />
-      
+
       <main>
         <Hero />
-        <StatsBar />
         <AboutSection />
         <WorkSection />
+        <MarqueeSection />
+        <ScrollShowcase />
         <CapabilitiesSection />
-        <ClientsSection />
         <WorldQuantSection />
-        <StackedCards />
         <ImmersiveScaleSection />
         <CTASection />
       </main>

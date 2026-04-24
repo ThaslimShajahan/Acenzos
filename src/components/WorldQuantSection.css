@@ -1,1 +1,127 @@
-/* Styles consolidated in StackedCards.css */
+/* ── OUR APPROACH — white section ── */
+.wq-section {
+  background: #ffffff;
+  padding: 120px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+.wq-wrap {
+  position: relative;
+  z-index: 1;
+}
+.wq-section .gs-num {
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.035);
+  color: transparent;
+}
+
+/* Section header */
+.wq-hd {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 72px;
+}
+.wq-hd-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.32);
+  white-space: nowrap;
+}
+.wq-hd-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Intro two-column row */
+.wq-intro {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 8vw;
+  align-items: start;
+  margin-bottom: 80px;
+}
+
+.wq-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.90;
+  letter-spacing: -0.04em;
+  color: #0a0a10;
+}
+.wq-title-em {
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: rgba(10, 10, 16, 0.32);
+  letter-spacing: -0.02em;
+}
+
+.wq-desc {
+  font-size: 0.95rem;
+  line-height: 1.88;
+  color: rgba(10, 10, 16, 0.55);
+  padding-top: 8px;
+  max-width: 500px;
+}
+
+/* Ethos rows */
+.wq-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.wq-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 1.4fr;
+  gap: 32px;
+  align-items: start;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: padding-left 0.35s var(--ease);
+}
+.wq-row:hover { padding-left: 8px; }
+
+.wq-row-num {
+  font-family: var(--font-mono);
+  font-size: 0.60rem;
+  letter-spacing: 0.12em;
+  color: rgba(0, 0, 0, 0.28);
+  padding-top: 4px;
+  transition: color 0.3s;
+}
+.wq-row:hover .wq-row-num { color: #0a0a10; }
+
+.wq-row-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0a0a10;
+  line-height: 1.1;
+}
+
+.wq-row-text {
+  font-size: 0.88rem;
+  line-height: 1.82;
+  color: rgba(10, 10, 16, 0.55);
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .wq-intro { grid-template-columns: 1fr; gap: 32px; }
+  .wq-row { grid-template-columns: 36px 1fr; gap: 20px; }
+  .wq-row-text { grid-column: 2; }
+}
+@media (max-width: 540px) {
+  .wq-row { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+  .wq-row-num { display: none; }
+}

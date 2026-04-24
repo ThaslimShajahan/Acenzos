@@ -1,126 +1,78 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import img1 from '../assets/imgs/3175466.jpg';
-import img2 from '../assets/imgs/10510710.jpg';
-import img3 from '../assets/imgs/10607573.jpg';
-import img4 from '../assets/imgs/11194857.jpg';
-import './StackedCards.css';
+import { PROJECTS_DATA } from '../data/projects';
+import './WorkSection.css';
 
-const PROJECTS = [
-  {
-    id: 1,
-    slug: 'redber',
-    title: 'Redber AI',
-    category: 'AI Product',
-    year: '2024',
-    tags: ['Conversational AI', 'Lead Capture', '24/7 Automation'],
-    img: img1
-  },
-  {
-    id: 2,
-    slug: 'shopify-storefront',
-    title: 'Shopify Storefront',
-    category: 'E-Commerce',
-    year: '2024',
-    tags: ['Shopify', 'Liquid', 'Custom Theme'],
-    img: img2
-  },
-  {
-    id: 3,
-    slug: 'acenzos-platform',
-    title: 'Acenzos Platform',
-    category: 'SaaS Development',
-    year: '2025',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
-    img: img3
-  },
-  {
-    id: 4,
-    slug: 'client-dashboard',
-    title: 'Client Dashboard',
-    category: 'Web Application',
-    year: '2024',
-    tags: ['Analytics', 'Real-time', 'Custom UI'],
-    img: img4
-  }
-];
+const FEATURED = PROJECTS_DATA.slice(0, 2);
+const ease = [0.16, 1, 0.3, 1];
 
 const WorkSection = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.08 });
 
   return (
-    <section className="work-section" ref={containerRef}>
-      <div className="wrap work-wrap">
-        
-        {/* Left Pinned Content */}
-        <div className="work-left-pinned">
-          <div className="work-left-content">
-            <motion.p 
-              className="eyebrow"
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-            >
-              Selected Work
-            </motion.p>
-            <motion.h2 
-              className="h-xl work-heading"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              Products we've <br />
-              <span className="text-muted">built & launched.</span>
-            </motion.h2>
+    <section className="ws-section" ref={ref} id="work">
+      {/* Ghost number for depth */}
+      <span className="gs-num" aria-hidden>02</span>
+      
+      <div className="wrap">
 
-            <div className="work-index-list">
-              {PROJECTS.map((p, i) => (
-                <div 
-                  key={p.id} 
-                  className={`work-index-item ${activeIndex === i ? 'active' : ''}`}
-                  onMouseEnter={() => setActiveIndex(i)}
-                >
-                  <span className="work-index-num">{String(i + 1).padStart(2, '0')}</span>
-                  <div className="work-index-info">
-                    <span className="work-index-title">{p.title}</span>
-                    <span className="work-index-cat">{p.category}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <motion.div
+          className="ws-hd"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="ws-hd-label">[ Selected Work ]</span>
+          <div className="ws-hd-line" />
+          <Link to="/work" className="ws-hd-link">
+            View all <span className="ws-hd-arrow">↗</span>
+          </Link>
+        </motion.div>
 
-        {/* Right Scrolling Slides */}
-        <div className="work-right-slides">
-          {PROJECTS.map((p, i) => (
-            <div 
-              key={p.id} 
-              className="work-slide"
-              onMouseEnter={() => setActiveIndex(i)}
+        <div className="ws-grid">
+          {FEATURED.map((p, i) => (
+            <motion.div
+              key={p.id}
+              className="ws-card-wrap"
+              initial={{ opacity: 0, y: 36 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.75, delay: 0.08 + i * 0.15, ease }}
             >
-              <div className="work-slide-img-wrap">
-                <img src={p.img} alt={p.title} className="work-slide-img" />
-                <div className="work-slide-overlay">
-                  <div className="work-slide-top">
-                    <span className="work-slide-cat">{p.category}</span>
-                    <span className="work-slide-year">{p.year}</span>
+              <Link to={`/work/${p.slug}`} className="ws-card" aria-label={p.title}>
+
+                {/* Visual area: image + reveal button stacked. Button (z-1) is
+                    behind the image (z-2); the corner peel reveals it. */}
+                <div className="ws-card-visual">
+                  <div className="ws-card-img-box" style={{ background: p.gradient }}>
+                    <img src={p.img} alt={p.title} className="ws-card-img" />
                   </div>
-                  <div className="work-slide-bottom">
-                    <h3 className="work-slide-title">{p.title}</h3>
-                    <div className="work-slide-tags">
-                      {p.tags.map(t => <span key={t} className="work-slide-tag">{t}</span>)}
+
+                  <div className="ws-card-btn-wrap" aria-hidden>
+                    <div className="ws-card-btn">
+                      <div className="ws-card-btn-icon-wrap">
+                        <span className="ws-card-btn-icon ws-card-btn-icon--primary">↗</span>
+                        <span className="ws-card-btn-icon ws-card-btn-icon--secondary">↗</span>
+                      </div>
                     </div>
-                    <Link to={`/work/${p.slug}`} className="work-slide-cta">
-                      View Case Study <span>→</span>
-                    </Link>
                   </div>
                 </div>
-              </div>
-            </div>
+
+                {/* Card info */}
+                <div className="ws-card-info">
+                  <div className="ws-card-titles">
+                    <h3 className="ws-card-title">{p.title}</h3>
+                    <p className="ws-card-desc">{p.tagline}</p>
+                  </div>
+                  <div className="ws-card-tag-row">
+                    <span className="ws-card-tag">{p.category} · {p.year}</span>
+                    <span className="ws-card-tag-arrow">↗</span>
+                  </div>
+                </div>
+
+              </Link>
+            </motion.div>
           ))}
         </div>
 

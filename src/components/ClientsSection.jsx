@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './ClientsSection.css';
 
-const clients = [
-  { name: 'Haya Resort',   abbr: 'HR' },
-  { name: 'StyleCraft',    abbr: 'SC' },
-  { name: 'Redber AI',     abbr: 'RB' },
-  { name: 'MarketBloom',   abbr: 'MB' },
-  { name: 'PureShop',      abbr: 'PS' },
-  { name: 'TechForge',     abbr: 'TF' },
-  { name: 'LaunchPad',     abbr: 'LP' },
-  { name: 'NovaBrand',     abbr: 'NB' },
+const CLIENTS = [
+  { name: 'Haya Resort',   abbr: 'HR', accent: '#f0b840' },
+  { name: 'StyleCraft',    abbr: 'SC', accent: '#9b7fe8' },
+  { name: 'Redber AI',     abbr: 'RB', accent: '#4db8ff' },
+  { name: 'MarketBloom',   abbr: 'MB', accent: '#b5f23a' },
+  { name: 'PureShop',      abbr: 'PS', accent: '#ff6e6e' },
+  { name: 'TechForge',     abbr: 'TF', accent: '#9b7fe8' },
+  { name: 'LaunchPad',     abbr: 'LP', accent: '#f0b840' },
+  { name: 'NovaBrand',     abbr: 'NB', accent: '#4db8ff' },
 ];
 
-const Track = ({ reverse = false }) => (
-  <div className={`cl-track ${reverse ? 'cl-track--reverse' : ''}`}>
-    {[...clients, ...clients].map((c, i) => (
-      <div key={i} className="cl-logo-card">
-        <span className="cl-logo-abbr">{c.abbr}</span>
-        <span className="cl-logo-name">{c.name}</span>
+const Track = ({ reverse = false, paused = false }) => (
+  <div className={`cl-track ${reverse ? 'cl-track--rev' : ''} ${paused ? 'cl-track--paused' : ''}`}>
+    {[...CLIENTS, ...CLIENTS].map((c, i) => (
+      <div key={i} className="cl-card" style={{ '--card-accent': c.accent }}>
+        <span className="cl-abbr">{c.abbr}</span>
+        <span className="cl-name">{c.name}</span>
       </div>
     ))}
   </div>
@@ -26,31 +26,45 @@ const Track = ({ reverse = false }) => (
 
 const ClientsSection = () => {
   const [paused, setPaused] = useState(false);
+
   return (
     <section className="cl-section" id="clients">
       <div className="wrap">
-        <div className="cl-header">
-          <p className="s-label">Trusted By</p>
+        <motion.div
+          className="cl-header"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.16,1,0.3,1] }}
+        >
+          <p className="eyebrow">Trusted By</p>
           <h2 className="cl-heading">
-            Brands that trust our craft
+            Brands that trust our craft.
           </h2>
-        </div>
+        </motion.div>
       </div>
 
       <div
-        className={`cl-tracks ${paused ? 'paused' : ''}`}
+        className="cl-tracks"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <Track />
-        <Track reverse />
+        <Track paused={paused} />
+        <Track reverse paused={paused} />
       </div>
 
-      {/* Testimonial pull-quote */}
       <div className="wrap">
-        <div className="cl-quote">
+        <motion.div
+          className="cl-quote"
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
+        >
+          <span className="cl-quote-mark">"</span>
           <p className="cl-quote-text">
-            "Acenzos rebuilt our Shopify store from the ground up. The result was faster, more beautiful, and our conversion rate jumped 30% in the first month."
+            Acenzos rebuilt our Shopify store from the ground up. The result was faster,
+            more beautiful — and our conversion rate jumped 30% in the first month.
           </p>
           <div className="cl-quote-author">
             <div className="cl-quote-avatar">MK</div>
@@ -59,7 +73,7 @@ const ClientsSection = () => {
               <span className="cl-quote-role">Founder, StyleCraft</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

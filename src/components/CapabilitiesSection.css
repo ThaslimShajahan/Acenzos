@@ -1,1 +1,163 @@
-/* Styles consolidated in StackedCards.css */
+/* ── CAPABILITIES ── */
+.cap-section {
+  background: var(--surface);
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.cap-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 8vw;
+  align-items: start;
+}
+
+/* Left column */
+.cap-left { position: sticky; top: 100px; }
+
+.cap-hd {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.cap-hd-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.cap-hd-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.cap-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5.5rem);
+  font-weight: 700;
+  line-height: 0.91;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+.cap-title-em {
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: rgba(240, 238, 255, 0.35);
+  letter-spacing: -0.02em;
+}
+
+.cap-sub {
+  font-size: 0.88rem;
+  line-height: 1.82;
+  color: var(--text-3);
+}
+
+/* Right column: service list */
+.cap-right { padding-bottom: 120px; }
+
+.cap-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.cap-row {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.35s;
+}
+.cap-row:hover,
+.cap-row.is-active {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cap-row-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 28px 16px;
+  cursor: default;
+  transition: padding-left 0.35s var(--ease);
+}
+.cap-row:hover .cap-row-inner,
+.cap-row.is-active .cap-row-inner { padding-left: 24px; }
+
+.cap-row-num {
+  font-family: var(--font-mono);
+  font-size: 0.60rem;
+  letter-spacing: 0.12em;
+  color: var(--text-3);
+  min-width: 26px;
+  padding-top: 5px;
+  transition: color 0.3s;
+}
+.cap-row.is-active .cap-row-num,
+.cap-row:hover .cap-row-num { color: var(--violet); }
+
+.cap-row-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cap-row-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-3);
+  line-height: 1;
+  transition: color 0.3s;
+}
+.cap-row.is-active .cap-row-title,
+.cap-row:hover .cap-row-title { color: var(--text); }
+
+.cap-row-desc {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  color: var(--text-3);
+  max-width: 380px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.35s var(--ease);
+}
+.cap-row.is-active .cap-row-desc,
+.cap-row:hover .cap-row-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cap-row-arrow {
+  font-size: 1rem;
+  color: var(--violet);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s var(--ease);
+  transform: translateX(-8px);
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+.cap-row.is-active .cap-row-arrow,
+.cap-row:hover .cap-row-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .cap-wrap { grid-template-columns: 1fr; gap: 64px; }
+  .cap-left { position: static; }
+  .cap-right { padding-bottom: 0; }
+}
+@media (max-width: 600px) {
+  .cap-row-title { font-size: 1.1rem; }
+  .cap-row-inner { padding: 20px 8px; }
+}

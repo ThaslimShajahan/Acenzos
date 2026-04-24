@@ -1,1 +1,88 @@
-/* Styles consolidated in StackedCards.css */
+/* ── IMMERSIVE SCALE SECTION ── */
+.imm-section {
+  background: linear-gradient(180deg, #0a0a0a 0%, #030305 60%, #000000 100%);
+  padding: 120px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.imm-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.imm-hd {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 64px;
+}
+.imm-hd-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.imm-hd-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.imm-title {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 15vw, 17rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 48px;
+}
+.imm-title-em {
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: rgba(240, 238, 255, 0.40);
+  letter-spacing: -0.02em;
+}
+
+.imm-sub {
+  font-size: 0.95rem;
+  line-height: 1.88;
+  color: var(--text-2);
+  max-width: 560px;
+  margin-bottom: 40px;
+}
+
+.imm-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 1px solid var(--border-mid);
+  border-radius: 8px;
+  width: fit-content;
+  transition: all 0.3s var(--ease);
+}
+.imm-cta:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.30);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 860px) {
+  .imm-title { font-size: clamp(4rem, 14vw, 8rem); }
+}
+@media (max-width: 540px) {
+  .imm-title { font-size: clamp(3.5rem, 16vw, 6rem); }
+  .imm-cta { width: 100%; justify-content: center; }
+}

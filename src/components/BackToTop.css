@@ -1,0 +1,66 @@
+/* ── Back To Top Button ── */
+.btt-btn {
+  position: fixed;
+  bottom: 36px;
+  right: 36px;
+  z-index: 9000;
+  cursor: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(10, 10, 18, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.btt-btn:hover {
+  background: rgba(30, 30, 50, 0.95);
+  border-color: rgba(255, 255, 255, 0.30);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Track — clips the two arrows so they slide in/out */
+.btt-track {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  display: block;
+}
+
+.btt-arrow {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Primary sits at 0, exits upward on hover */
+.btt-arrow--primary  { transform: translateY(0); }
+.btt-btn:hover .btt-arrow--primary  { transform: translateY(-110%); }
+
+/* Secondary enters from below on hover */
+.btt-arrow--secondary { transform: translateY(110%); }
+.btt-btn:hover .btt-arrow--secondary { transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .btt-btn {
+    bottom: 24px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}

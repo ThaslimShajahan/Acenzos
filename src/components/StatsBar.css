@@ -1,1 +1,153 @@
-/* (stats + about styles are in StackedCards.css consolidated) */
+/* ── ABOUT SECTION — white light theme ── */
+.about-section {
+  background: #ffffff;
+  padding: 120px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.about-wrap {
+  position: relative;
+  z-index: 1;
+}
+.about-title-row { line-height: inherit; }
+
+/* Ghost number — barely visible on white */
+.about-section .gs-num {
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.04);
+  color: transparent;
+}
+
+/* Section header row */
+.about-hd {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 72px;
+}
+.about-hd-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+}
+.about-hd-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Two-column body */
+.about-body {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 8vw;
+  align-items: start;
+}
+
+.about-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 9rem);
+  font-weight: 700;
+  line-height: 0.90;
+  letter-spacing: -0.04em;
+  color: #0a0a10;
+}
+.about-title-em {
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.35);
+  letter-spacing: -0.02em;
+}
+
+.about-body-right {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-top: 8px;
+}
+.about-desc {
+  font-size: 0.95rem;
+  line-height: 1.88;
+  color: rgba(0, 0, 0, 0.55);
+  max-width: 500px;
+}
+
+/* Capabilities numbered list */
+.about-caps { display: flex; flex-direction: column; }
+.about-cap-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  transition: padding-left 0.3s var(--ease);
+}
+.about-cap-row:last-child { border-bottom: 1px solid rgba(0, 0, 0, 0.07); }
+.about-cap-row:hover { padding-left: 10px; }
+
+.about-cap-num {
+  font-family: var(--font-mono);
+  font-size: 0.60rem;
+  letter-spacing: 0.10em;
+  color: rgba(0, 0, 0, 0.28);
+  min-width: 28px;
+  padding-top: 3px;
+  transition: color 0.3s;
+}
+.about-cap-row:hover .about-cap-num { color: #0a0a10; }
+
+.about-cap-info { display: flex; flex-direction: column; gap: 4px; }
+.about-cap-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0a0a10;
+  transition: color 0.3s;
+}
+.about-cap-row:hover .about-cap-title { color: #000000; }
+.about-cap-desc {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: rgba(0, 0, 0, 0.40);
+  line-height: 1.6;
+}
+
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0a0a10;
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  width: fit-content;
+  transition: all 0.3s var(--ease);
+}
+.about-cta:hover {
+  background: #0a0a10;
+  color: #ffffff;
+  border-color: #0a0a10;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 860px) {
+  .about-body { grid-template-columns: 1fr; gap: 48px; }
+  .about-title { font-size: clamp(3rem, 10vw, 5rem); }
+}
+@media (max-width: 540px) {
+  .about-cta { width: 100%; justify-content: center; }
+}

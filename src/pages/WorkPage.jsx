@@ -3,82 +3,83 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import CTASection from '../components/CTASection';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { PROJECTS_DATA } from '../data/projects';
 import './Pages.css';
 
+const ease = [0.16, 1, 0.3, 1];
+
 const WorkPage = () => {
   return (
-    <motion.div 
+    <motion.div
       className="page-wrapper page-dark"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.7, ease }}
     >
       <Helmet>
-        <title>Selected Work | Acenzos</title>
-        <meta name="description" content="Explore our portfolio of category-defining digital products, campaigns, and experiences." />
+        <title>Selected Work — Case Studies | Acenzos</title>
+        <meta name="description" content="Explore Acenzos case studies — AI products, Shopify storefronts, and custom web platforms built with purpose." />
+        <link rel="canonical" href="https://acenzos.com/work" />
+        <meta property="og:title"       content="Selected Work — Case Studies | Acenzos" />
+        <meta property="og:description" content="AI products, Shopify storefronts, and custom platforms. Built with precision." />
+        <meta property="og:url"         content="https://acenzos.com/work" />
       </Helmet>
-      
+
+      <Breadcrumbs crumbs={[
+        { label: 'Home', path: '/' },
+        { label: 'Work' }
+      ]} />
+
       <section className="page-hero">
         <div className="wrap">
-          <motion.p 
-            className="eyebrow eyebrow-dark"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
+          <motion.p className="eyebrow" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.2 }}>
             Selected Work
           </motion.p>
-          <motion.h1 
-            className="h-display h-white"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            We build<br/><i>platforms</i>.
+          <motion.h1 className="h-display" initial={{ opacity:0, y:40 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.3, duration:0.8, ease }}>
+            We build<br /><span className="grad-violet">platforms.</span>
           </motion.h1>
-          <motion.div 
-            className="hero-sub-row"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            style={{ marginTop: '40px', maxWidth: '600px' }}
+          <motion.p
+            style={{ fontSize:'1.1rem', lineHeight:'1.7', color:'var(--text-2)', maxWidth:'560px', marginTop:'20px' }}
+            initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.5 }}
           >
-            <p className="hero-sub--dark text-muted-dark" style={{ fontSize: '1.2rem', lineHeight: '1.6' }}>
-              We build Shopify storefronts, custom web applications, and in-house AI products.
-              Every project is tackled with the same obsession: great design, clean code, and measurable outcomes for our clients.
-            </p>
-          </motion.div>
+            Shopify storefronts, custom web apps, and in-house AI products — each project tackled with the same obsession: great design, clean code, measurable outcomes.
+          </motion.p>
         </div>
       </section>
-      
-      <section className="page-content" style={{ paddingBottom: '160px' }}>
-        <div className="wrap">
-          
-          <div className="page-section-header" style={{ marginBottom: '60px', borderTop: '1px solid var(--border-dark)', paddingTop: '40px' }}>
-            <h2 className="h-xl h-white">Featured <i>Case Studies</i></h2>
-          </div>
 
+      <section className="page-content" style={{ borderTop: '1px solid var(--border)', paddingTop: '80px' }}>
+        <div className="wrap">
+          <div className="page-section-header" style={{ marginBottom: '52px' }}>
+            <h2 className="h-xl">Featured <span className="grad-violet">Case Studies</span></h2>
+          </div>
           <div className="work-grid">
             {PROJECTS_DATA.map((proj, i) => (
-              <motion.div 
-                key={proj.id} 
+              <motion.div
+                key={proj.id}
                 className="work-card"
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: (i % 2) * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity:0, y:56 }}
+                whileInView={{ opacity:1, y:0 }}
+                viewport={{ once:true, margin:'-80px' }}
+                transition={{ duration:0.8, delay:(i%2)*0.1, ease }}
               >
-                <Link to={`/work/${proj.slug}`} className="work-card-image" style={{ background: proj.color }}>
-                  <div className="work-hover-reveal">View Case Study</div>
+                <Link to={`/work/${proj.slug}`} className="work-card-image" data-cursor="VIEW">
+                  {proj.img && (
+                    <img
+                      src={proj.img}
+                      alt={proj.title}
+                      style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+                    />
+                  )}
+                  <div className="work-hover-reveal">View Case Study ↗</div>
                 </Link>
                 <div className="work-card-meta">
-                  <div className="work-card-info">
+                  <div>
                     <h3 className="work-card-title">{proj.title}</h3>
-                    <p className="work-card-category">{proj.category}</p>
+                    <p className="work-card-category">{proj.category} · {proj.year}</p>
                   </div>
-                  <span className="work-card-year">{proj.year}</span>
+                  <span className="work-card-year">{proj.number}</span>
                 </div>
               </motion.div>
             ))}
@@ -86,28 +87,27 @@ const WorkPage = () => {
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="section section-dark" style={{ borderTop: '1px solid var(--border-dark)' }}>
+      {/* Methodology section */}
+      <section className="section" style={{ borderTop: '1px solid var(--border)', paddingBottom: '160px' }}>
         <div className="wrap">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
-            <div>
-              <p className="eyebrow eyebrow-dark">Our Methodology</p>
-              <h2 className="h-xl h-white" style={{ fontSize: '3.5rem' }}>Build.<br/><i>Launch</i>. Grow.</h2>
-            </div>
-            <div>
-              <p className="hero-sub--dark text-muted-dark" style={{ fontSize: '1.1rem', marginBottom: '30px' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
+            <motion.div initial={{ opacity:0, y:32 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}>
+              <p className="eyebrow">Our Methodology</p>
+              <h2 className="h-xl">Build.<br /><span className="grad-lime">Launch</span>. Grow.</h2>
+            </motion.div>
+            <motion.div initial={{ opacity:0, y:32 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ delay:0.15 }}>
+              <p style={{ fontSize:'1rem', lineHeight:'1.8', color:'var(--text-2)', marginBottom:'28px' }}>
                 Every product we build is launched with a clear growth plan. We don't stop at "done" — we iterate, measure, and optimise until the numbers prove it.
               </p>
-              <p className="hero-sub--dark text-muted-dark" style={{ fontSize: '1.1rem' }}>
-                Whether it's a Shopify store or a custom-built SaaS, we stay with you post-launch to ensure the product keeps improving, keeps converting, and keeps growing.
+              <p style={{ fontSize:'1rem', lineHeight:'1.8', color:'var(--text-2)' }}>
+                Whether it's a Shopify store or a custom-built SaaS, we stay with you post-launch to ensure the product keeps improving, converting, and growing.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       <CTASection />
-      
     </motion.div>
   );
 };

@@ -233,6 +233,14 @@ const Drone = ({ scrollYProgress, cfg }) => {
 const TechSwarm = () => {
   const { scrollYProgress } = useScroll();
   const [cfg, setCfg] = useState(() => getConfig(window.innerWidth));
+  // Defer WebGL init by one frame so the preloader exit animation
+  // fully composites before the GPU is handed to Three.js
+  const [canvasReady, setCanvasReady] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setCanvasReady(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setCfg(getConfig(window.innerWidth));
@@ -240,7 +248,7 @@ const TechSwarm = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  if (cfg.scale === 0) return null;
+  if (cfg.scale === 0 || !canvasReady) return null;
 
   return (
     <div className="tech-swarm-canvas-container">

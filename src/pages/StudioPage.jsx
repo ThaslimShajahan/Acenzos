@@ -1,121 +1,126 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import CTASection from '../components/CTASection';
+import Breadcrumbs from '../components/Breadcrumbs';
 import './Pages.css';
 
+const ease = [0.16, 1, 0.3, 1];
+
 const TEAM_STATS = [
-  { label: 'Founded', value: '2022' },
-  { label: 'Location', value: 'KERALA, INDIA' },
-  { label: 'Core Products', value: '3+' },
-  { label: 'Shopify Stores Built', value: '20+' }
+  { label: 'Global Clients',       value: '40+' },
+  { label: 'Core Products',        value: '03' },
+  { label: 'Platforms Built',      value: '25+' },
+];
+
+const PRINCIPLES = [
+  {
+    num: '01',
+    title: 'Uncompromising Quality',
+    desc: 'We don’t cut corners. From the underlying system architecture to the micro-interactions on the frontend, every detail is meticulously crafted and rigorously tested.'
+  },
+  {
+    num: '02',
+    title: 'Design as Function',
+    desc: 'Aesthetics are meaningless without usability. We design systems that look premium but, more importantly, solve complex problems with intuitive clarity.'
+  },
+  {
+    num: '03',
+    title: 'Built for Scale',
+    desc: 'We architect platforms not just for launch day, but for years of growth. Our technical foundations are resilient, secure, and infinitely scalable.'
+  }
 ];
 
 const StudioPage = () => {
   return (
-    <motion.div 
-      className="page-wrapper page-light"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    <motion.div
+      className="page-wrapper page-dark"
+      initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
+      transition={{ duration:0.7, ease }}
     >
       <Helmet>
-        <title>The Studio & Culture | Acenzos</title>
-        <meta name="description" content="Inside our creative studio. We are a collective of thinkers, designers, and engineers." />
+        <title>The Studio | Acenzos</title>
+        <meta name="description" content="A focused collective of engineers and designers based in Kerala, India." />
       </Helmet>
-      
+
+      <Breadcrumbs crumbs={[
+        { label: 'Home', path: '/' },
+        { label: 'Studio' }
+      ]} />
+
       <section className="page-hero">
         <div className="wrap">
-          <motion.p 
-            className="eyebrow"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
+          <motion.p className="eyebrow" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.2 }}>
             Inside The Studio
           </motion.p>
-          <motion.h1 
-            className="h-display"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            About<br/><i>Acenzos.</i>
+          <motion.h1 className="h-display" initial={{ opacity:0, y:40 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.3, duration:0.8, ease }}>
+            About<br /><span className="grad-violet">Acenzos.</span>
           </motion.h1>
         </div>
       </section>
-      
-      <section className="page-content" style={{ paddingBottom: '80px' }}>
+
+      {/* Intro & Manifesto */}
+      <section className="page-content" style={{ paddingBottom:'100px', borderTop:'1px solid var(--border)' }}>
         <div className="wrap">
-          
-          <div className="studio-intro">
-            <motion.h2 
+          <div className="studio-intro" style={{ marginBottom: '120px' }}>
+            <motion.h2
               className="studio-headline"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity:0, y:28 }}
+              whileInView={{ opacity:1, y:0 }}
+              viewport={{ once:true }}
+              transition={{ duration:0.8, ease }}
             >
-              We are a small, focused team of builders based in Kerala, India. We specialise in Shopify development and in-house product creation. Our in-house AI product, Redber, is used by businesses across the region to automate customer communication.
+              We are a tight-knit collective of engineers, designers, and strategists operating from Kerala, India. We architect high-performance Shopify ecosystems and bespoke digital platforms. Our flagship AI solution, Redber, empowers modern enterprises to automate engagement with unparalleled precision.
             </motion.h2>
           </div>
 
-          <div className="studio-stats">
+          <div className="studio-stats" style={{ borderTop: 'none', paddingTop: 0, paddingBottom: '60px' }}>
             {TEAM_STATS.map((stat, i) => (
-              <motion.div 
-                key={stat.label} 
+              <motion.div
+                key={stat.label}
                 className="studio-stat-box"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
+                initial={{ opacity:0, y:24 }}
+                whileInView={{ opacity:1, y:0 }}
+                viewport={{ once:true }}
+                transition={{ delay:i*0.1, duration:0.5, ease }}
               >
                 <span className="stat-val">{stat.value}</span>
                 <span className="stat-lbl">{stat.label}</span>
               </motion.div>
             ))}
           </div>
-
-          <div className="studio-gallery">
-            <motion.div initial={{ opacity:0, y: 30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6 }} className="sg-image sg-tall" style={{ background: '#e0e0e0' }} />
-            <motion.div initial={{ opacity:0, y: 30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.1 }} className="sg-image sg-wide" style={{ background: '#d5d5d5' }} />
-            <motion.div initial={{ opacity:0, y: 30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.2 }} className="sg-image" style={{ background: '#c8c8c8' }} />
-            <motion.div initial={{ opacity:0, y: 30 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.6, delay:0.3 }} className="sg-image" style={{ background: '#bcbcbc' }} />
-          </div>
-
         </div>
       </section>
 
-      {/* Careers Section */}
-      <section className="section" style={{ borderTop: '1px solid var(--border)' }}>
+      {/* Principles */}
+      <section className="section" style={{ borderTop:'1px solid var(--border)', padding: '120px 0', background: 'var(--surface)' }}>
         <div className="wrap">
-           <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 2fr', gap: '80px' }}>
-              <div>
-                <p className="eyebrow">Join the swarm</p>
-                <h2 className="h-xl">Careers</h2>
-                <p style={{ color: 'var(--text-2)', marginTop: '20px', lineHeight: '1.6' }}>We are always looking for exceptional engineering and design talent. If you build at the highest level, we want to talk.</p>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <a href="mailto:careers@acenzos.com" style={{ display: 'flex', justifyContent: 'space-between', padding: '30px', border: '1px solid var(--border)', borderRadius: 'var(--r-sm)', textDecoration: 'none', color: 'var(--text)', transition: 'background 0.3s' }} onMouseOver={e => e.currentTarget.style.background = 'var(--bg-white)'} onMouseOut={e => e.currentTarget.style.background = 'transparent'}>
-                  <h4 style={{ fontSize: '1.2rem' }}>Shopify Developer (Liquid / Hydrogen)</h4>
-                  <span style={{ color: 'var(--text-3)' }}>Remote</span>
-                </a>
-                <a href="mailto:careers@acenzos.com" style={{ display: 'flex', justifyContent: 'space-between', padding: '30px', border: '1px solid var(--border)', borderRadius: 'var(--r-sm)', textDecoration: 'none', color: 'var(--text)', transition: 'background 0.3s' }} onMouseOver={e => e.currentTarget.style.background = 'var(--bg-white)'} onMouseOut={e => e.currentTarget.style.background = 'transparent'}>
-                  <h4 style={{ fontSize: '1.2rem' }}>Full-Stack React / Node.js Developer</h4>
-                  <span style={{ color: 'var(--text-3)' }}>Remote</span>
-                </a>
-                <a href="mailto:careers@acenzos.com" style={{ display: 'flex', justifyContent: 'space-between', padding: '30px', border: '1px solid var(--border)', borderRadius: 'var(--r-sm)', textDecoration: 'none', color: 'var(--text)', transition: 'background 0.3s' }} onMouseOver={e => e.currentTarget.style.background = 'var(--bg-white)'} onMouseOut={e => e.currentTarget.style.background = 'transparent'}>
-                  <h4 style={{ fontSize: '1.2rem' }}>UI/UX Designer (Figma)</h4>
-                  <span style={{ color: 'var(--text-3)' }}>Kerala / Remote</span>
-                </a>
-              </div>
-           </div>
+          <div className="page-section-header">
+            <p className="eyebrow">Our Philosophy</p>
+            <h2 className="h-xl">Core <span className="grad-lime">Principles</span></h2>
+          </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+            {PRINCIPLES.map((p, i) => (
+              <motion.div
+                key={p.num}
+                initial={{ opacity:0, y:30 }}
+                whileInView={{ opacity:1, y:0 }}
+                viewport={{ once:true, margin: '-40px' }}
+                transition={{ duration: 0.6, delay: i * 0.15, ease }}
+                style={{ padding: '40px', background: 'var(--void)', border: '1px solid var(--border)', borderRadius: 'var(--r-md)' }}
+              >
+                <span style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--violet)', marginBottom: '24px' }}>[{p.num}]</span>
+                <h3 style={{ fontSize: '1.4rem', fontFamily: 'var(--font-display)', fontWeight: '700', color: 'var(--text)', marginBottom: '16px' }}>{p.title}</h3>
+                <p style={{ color: 'var(--text-2)', lineHeight: '1.7', fontSize: '0.95rem' }}>{p.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       <CTASection />
-
     </motion.div>
   );
 };

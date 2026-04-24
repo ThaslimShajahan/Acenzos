@@ -1,0 +1,54 @@
+/* ── Sphere Section — scroll-linked particle sphere ── */
+
+.sphere-section {
+  position: relative;
+  height: 280vh;          /* tall so the animation plays over a long scroll */
+  background: var(--void);
+}
+
+/* Sticky viewport — 100svh stays on screen while section scrolls */
+.sphere-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Full-bleed canvas */
+.sphere-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Ambient label — bottom-left */
+.sphere-label {
+  position: absolute;
+  bottom: 48px;
+  left: var(--pad-x);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+  pointer-events: none;
+}
+.sphere-label-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(to right, var(--violet), transparent);
+}
+.sphere-label-txt {
+  font-family: var(--font-mono);
+  font-size: 0.60rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}

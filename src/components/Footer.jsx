@@ -1,66 +1,64 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
-import RisingWordmark from './RisingWordmark';
 
 const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="ac-footer" id="footer">
-      <div className="ac-footer-inner">
-        {/* Left Side: Brand & Links */}
-        <div className="ac-footer-left">
-          <div className="ac-brand-zone">
-             <RisingWordmark
-                text="ACENZOS"
-                fromColor="rgba(255,255,255,0)"
-                toColor="rgba(255,255,255,0.9)"
-                className="ac-wordmark"
-                stagger={0.06}
-                delay={0}
-             />
-             <p className="ac-tagline">Shopify experts. Product builders. AI innovators.</p>
-          </div>
-          
-          <div className="ac-footer-nav">
-             <div className="ac-nav-group">
-                <h4>STUDIO</h4>
-                <a href="#">About Us</a>
-                <a href="#">Capabilities</a>
-                <a href="#">Careers</a>
-             </div>
-             <div className="ac-nav-group">
-                <h4>SOCIAL</h4>
-                <a href="#">Instagram</a>
-                <a href="#">Twitter / X</a>
-                <a href="#">LinkedIn</a>
-             </div>
+    <footer className="footer">
+      <div className="wrap">
+
+        {/* Top: wordmark + tagline */}
+        <div className="footer-top">
+          <h2 className="footer-wordmark">ACENZOS</h2>
+          <p className="footer-tagline">
+            Commerce architecture &amp; applied AI.<br />
+            Creators of <span className="footer-tagline-em">Redber AI.</span>
+          </p>
+        </div>
+
+        <div className="footer-divider" />
+
+        {/* Nav grid */}
+        <div className="footer-nav">
+          <div className="footer-col">
+            <span className="footer-col-label">[ Studio ]</span>
+            <Link to="/studio"    className="footer-link">About Us</Link>
+            <Link to="/expertise" className="footer-link">Capabilities</Link>
+            <Link to="/work"      className="footer-link">Work</Link>
           </div>
 
-          <div className="ac-footer-legal">
-             <span>© {new Date().getFullYear()} ACENZOS</span>
-             <a href="#">Privacy Policy</a>
+          <div className="footer-col">
+            <span className="footer-col-label">[ Social ]</span>
+            <a href="#" className="footer-link">Instagram</a>
+            <a href="#" className="footer-link">Twitter / X</a>
+            <a href="#" className="footer-link">LinkedIn</a>
+          </div>
+
+          <div className="footer-col">
+            <span className="footer-col-label">[ Contact ]</span>
+            <a href="mailto:info@acenzos.com" className="footer-link">info@acenzos.com</a>
+            <Link to="/contact" className="footer-link">Start a Project</Link>
+          </div>
+
+          <div className="footer-col footer-col--avail">
+            <span className="footer-avail">
+              <span className="footer-avail-dot" />
+              Available for projects
+            </span>
+            <span className="footer-est">Est. 2026</span>
           </div>
         </div>
 
-        {/* Right Side: Action Card */}
-        <div className="ac-footer-right">
-           <div className="ac-action-card">
-              <div className="ac-card-glow"></div>
-              
-              <h2 className="ac-action-title">
-                HAVE A VISION?<br/>
-                <span className="ac-text-gradient">LET'S TALK.</span>
-              </h2>
-              
-              <p className="ac-action-desc">
-                We collaborate with ambitious brands to create digital products that leave a lasting impact.
-              </p>
-              
-              <button className="ac-magnetic-btn">
-                 <span className="ac-btn-text">START A PROJECT</span>
-                 <div className="ac-btn-ring"></div>
-              </button>
-           </div>
+        <div className="footer-divider" />
+
+        {/* Bottom */}
+        <div className="footer-bottom">
+          <span className="footer-copy">© {year} Acenzos. All rights reserved.</span>
+          <a href="#" className="footer-legal">Privacy Policy</a>
         </div>
+
       </div>
     </footer>
   );
