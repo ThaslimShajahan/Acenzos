@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import { droneStore } from '../droneStore';
 import './ImmersiveScaleSection.css';
 
